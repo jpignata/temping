@@ -25,6 +25,10 @@ describe Temping do
       vote.should be_valid
     end
     
+    it "raises ModelAlreadyDefined if a const is already defined" do
+      lambda { 2.times { create_model :dogs }}.should raise_error(Temping::ModelAlreadyDefined)
+    end
+    
     describe ".with_columns" do
       it "creates columns passed in through a block" do
         create_model :comments do 
