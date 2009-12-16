@@ -4,12 +4,8 @@ module Temping
   ModelAlreadyDefined = Class.new(StandardError)
 
   def self.included(base)
-    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3',
-                                                     :database => ':memory:' }
-  
-    unless ActiveRecord::Base.connected?
-      ActiveRecord::Base.establish_connection 'temping' 
-    end
+    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3', :database => ':memory:' }
+    ActiveRecord::Base.establish_connection 'temping' unless ActiveRecord::Base.connected?
   end
   
   def create_model(model_name, &block)    
