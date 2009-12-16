@@ -17,6 +17,7 @@ Temping is used to create temporary table-backed ActiveRecord models for use in 
         def popular?
           view_count > 100
         end
+      end
     end
     
     describe "#popular" do
@@ -33,7 +34,7 @@ Temping is used to create temporary table-backed ActiveRecord models for use in 
         
     end
     
-This is especially useful if testing an ActiveRecord plugin or a Module used in a Rails application:
+This is especially useful if testing an ActiveRecord plugin or a module used in a Rails application to decouple your module's tests from a concrete implementation.
   
     include Temping
     
