@@ -4,8 +4,8 @@ module Temping
   ModelAlreadyDefined = Class.new(StandardError)
 
   def self.included(base)
-    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3', 
-                                                     :database => ':memory:'}
+    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3',
+                                                     :database => ':memory:' }
   
     unless ActiveRecord::Base.connected?
       ActiveRecord::Base.establish_connection 'temping' 
@@ -14,7 +14,7 @@ module Temping
   
   def create_model(model_name, &block)    
     if eval("defined?(#{model_name.to_s.classify})")
-      raise ModelAlreadyDefined
+      raise ModelAlreadyDefined, "Constant #{model_name.to_s.classify} is already defined"
     end
 
     ModelFactory.new(model_name, &block).klass
