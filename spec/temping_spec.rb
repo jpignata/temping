@@ -41,6 +41,11 @@ describe Temping do
   end
   
   describe "database agnostism" do
+    it "supports Sqlite3" do
+      ActiveRecord::Base.establish_connection 'temping'
+      create_model(:oranges).should == Orange
+    end
+
     it "supports MySQL" do
       ActiveRecord::Base.establish_connection 'mysql'
       create_model(:apples).should == Apple
@@ -49,11 +54,6 @@ describe Temping do
     it "supports PostgreSQL" do
       ActiveRecord::Base.establish_connection 'postgres'
       create_model(:cherries).should == Cherry
-    end
-
-    it "supports Sqlite3" do
-      ActiveRecord::Base.establish_connection 'sqlite3'
-      create_model(:oranges).should == Orange
     end
   end
 end

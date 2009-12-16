@@ -1,10 +1,23 @@
 require 'active_record'
 
 module Temping
-  def create_model(model_name, &block)
-    unless eval("defined?(#{model_name.to_s.classify})")
-      ModelFactory.new(model_name, &block).klass
+  ModelAlreadyDefined = Class.new(StandardError)
+
+  def self.included(base)
+    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3', 
+                                                     :database => ':memory:'}
+  
+    unless ActiveRecord::Base.connected?
+      ActiveRecord::Base.establish_connection 'temping' 
     end
+  end
+  
+  def create_model(model_name, &block)    
+    if eval("defined?(#{model_name.to_s.classify})")
+      raise ModelAlreadyDefined
+    end
+
+    ModelFactory.new(model_name, &block).klass
   end
 
   class ModelFactory

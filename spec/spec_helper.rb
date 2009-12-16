@@ -11,10 +11,5 @@ ActiveRecord::Base.configurations = {
                  
  'postgres' => { :adapter      => 'postgresql', 
                  :database     => 'activerecord_unittest',
-                 :min_messages => 'warning' },
-                 
- 'sqlite3' => { :adapter  => 'sqlite3',
-                :database => ':memory:' }
+                 :min_messages => 'warning' }
 }
-
-ActiveRecord::Base.establish_connection 'mysql'
