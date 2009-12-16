@@ -45,3 +45,5 @@ This is especially useful if testing an ActiveRecord plugin or a module used in 
     end
     
     describe "HasArticles tests"...
+    
+By default, temping will use whichever connection ActiveRecord::Base has defined. If none exists, it'll use an in-memory SQLite3 instance.
