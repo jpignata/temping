@@ -1,5 +1,4 @@
 require 'active_record'
-require 'active_support'
 
 module Temping
   def create_model(model_name, &block)
