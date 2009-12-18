@@ -13,7 +13,8 @@ module Temping
       raise ModelAlreadyDefined, "Constant #{model_name.to_s.classify} is already defined"
     end
 
-    ModelFactory.new(model_name, &block).klass
+    factory = ModelFactory.new(model_name, &block)
+    factory.klass
   end
 
   class ModelFactory
