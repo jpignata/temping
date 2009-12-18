@@ -10,7 +10,7 @@ describe Temping do
     end
 
     it "evals all statements passed in through a block" do
-      votes = create_model :votes do
+      create_model :votes do
         with_columns do |table|
           table.string :voter
         end
