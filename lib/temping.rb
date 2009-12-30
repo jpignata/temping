@@ -9,12 +9,10 @@ module Temping
   end
   
   def create_model(model_name, &block)    
-    if eval("defined?(#{model_name.to_s.classify})")
-      raise ModelAlreadyDefined, "Constant #{model_name.to_s.classify} is already defined"
+    unless eval("defined?(#{model_name.to_s.classify})")
+      factory = ModelFactory.new(model_name, &block)
+      factory.klass
     end
-
-    factory = ModelFactory.new(model_name, &block)
-    factory.klass
   end
 
   class ModelFactory

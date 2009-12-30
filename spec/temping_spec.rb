@@ -25,8 +25,8 @@ describe Temping do
       vote.should be_valid
     end
     
-    it "raises ModelAlreadyDefined if a const is already defined" do
-      lambda { 2.times { create_model :dogs }}.should raise_error(Temping::ModelAlreadyDefined)
+    it "silently skip initialization if a const is already defined" do
+      lambda { 2.times { create_model :dogs }}.should_not raise_error(Temping::ModelAlreadyDefined)
     end
     
     describe ".with_columns" do
