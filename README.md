@@ -19,7 +19,7 @@ The basic setup of a model involves calling _create_model_ with a symbol that re
 
     include Temping
     
-    create_model :dogs
+    create_model :dog
     
     Dog.create => #<Dog id: 1>
     
@@ -27,7 +27,7 @@ Additional database columns can be specified via the _with_columns_ method which
 
     include Temping
     
-    create_model :dogs do
+    create_model :dog do
       with_columns do |t|
         t.string :name
         t.integer :age, :weight
@@ -40,7 +40,7 @@ When a block is passed to _create_model_, it is evaluated in the context of the 
 
     include Temping
     
-    create_model :dogs do
+    create_model :dog do
       include Duckish
 
       with_columns do |t|
