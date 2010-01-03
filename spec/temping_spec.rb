@@ -58,6 +58,7 @@ describe Temping do
 
       Orange.connection.class.should == ActiveRecord::ConnectionAdapters::SQLite3Adapter
       Orange.table_name.should == "oranges"
+      Orange.inspect.should == "Orange(id: integer)"
     end
 
     it "supports MySQL" do
@@ -66,6 +67,7 @@ describe Temping do
 
       Apple.connection.class.should == ActiveRecord::ConnectionAdapters::MysqlAdapter
       Apple.table_name.should == "apples"
+      Apple.inspect.should == "Apple(id: integer)"
     end
 
     it "supports PostgreSQL" do
@@ -74,6 +76,7 @@ describe Temping do
 
       Cherry.connection.class.should == ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
       Cherry.table_name.should == "cherries"
+      Cherry.inspect.should == "Cherry(id: integer)"
     end
   end
 end
