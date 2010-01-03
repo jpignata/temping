@@ -12,19 +12,19 @@ describe Temping do
     end
 
     it "evals all statements passed in through a block" do
-      create_model :vote do
+      create_model :publication do
         with_columns do |table|
-          table.string :voter
+          table.string :name
         end
         
-        validates_presence_of :voter
+        validates_presence_of :name
       end
       
-      vote = Vote.new
-      vote.should_not be_valid
-      
-      vote.voter = "Foo Bar"
-      vote.should be_valid
+      publication = Publication.new
+      publication.should_not be_valid
+      publication.errors.full_messages.should include("Name can't be blank")
+      publication.name = "The New York Times"
+      publication.should be_valid
     end
     
     it "silently skips initialization if a const is already defined" do
