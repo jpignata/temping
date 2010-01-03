@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), "/spec_helper")
 describe Temping do
   include Temping
 
-  describe ".create_model" do    
+  describe "#create_model" do
     it "creates and returns an AR::Base-derived model" do
       post_class = create_model :post
       post_class.ancestors.should include(ActiveRecord::Base)
