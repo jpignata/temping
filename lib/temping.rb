@@ -19,7 +19,7 @@ module Temping
   end
 
   class ModelFactory
-    attr_accessor :klass
+    attr_reader :klass
     
     def initialize(model_class, &block)
       @klass = Class.new(ActiveRecord::Base)
