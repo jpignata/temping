@@ -1,8 +1,6 @@
 require 'active_record'
 
 module Temping
-  ModelAlreadyDefined = Class.new(StandardError)
-
   def self.included(base)
     ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3', :database => ':memory:' }
     ActiveRecord::Base.establish_connection 'temping' unless ActiveRecord::Base.connected?

@@ -26,7 +26,7 @@ describe Temping do
     end
     
     it "silently skip initialization if a const is already defined" do
-      lambda { 2.times { create_model :dogs }}.should_not raise_error(Temping::ModelAlreadyDefined)
+      lambda { 2.times { create_model :dogs }}.should_not raise_error
     end
     
     describe ".with_columns" do
