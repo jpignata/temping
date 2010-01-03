@@ -17,6 +17,7 @@ As we're using temporary tables all data will be dropped when the database conne
 
 The basic setup of a model involves calling _create_model_ with a symbol that represents the plural table name of the model you wish to create. By default, this will create a temporary table with an _id_ column.
 
+    require 'temping'
     include Temping
     
     create_model :dog
@@ -25,6 +26,7 @@ The basic setup of a model involves calling _create_model_ with a symbol that re
     
 Additional database columns can be specified via the _with_columns_ method which uses Rails migration syntax:
 
+    require 'temping'
     include Temping
     
     create_model :dog do
@@ -38,6 +40,7 @@ Additional database columns can be specified via the _with_columns_ method which
     
 When a block is passed to _create_model_, it is evaluated in the context of the ActiveRecord class. This means anything you do in an ActiveRecord model can be accomplished in the block including method definitions, validations, module includes, etc.
 
+    require 'temping'
     include Temping
     
     create_model :dog do
