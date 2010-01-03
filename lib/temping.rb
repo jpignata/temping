@@ -2,8 +2,12 @@ require 'active_record'
 
 module Temping
   def self.included(base)
-    ActiveRecord::Base.configurations['temping'] = { :adapter  => 'sqlite3', :database => ':memory:' }
-    ActiveRecord::Base.establish_connection 'temping' unless ActiveRecord::Base.connected?
+    unless ActiveRecord::Base.connected?
+      ActiveRecord::Base.configurations['temping'] = { 
+        :adapter  => 'sqlite3', :database => ':memory:'
+      }    
+      ActiveRecord::Base.establish_connection 'temping' 
+    end
   end
   
   def create_model(model_name, &block)    
