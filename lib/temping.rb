@@ -38,6 +38,10 @@ module Temping
           def with_columns
             connection.change_table(table_name) { |table| yield(table) }
           end
+
+          def table_exists?
+            true
+          end
         end
       end
     
