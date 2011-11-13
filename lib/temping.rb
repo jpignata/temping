@@ -1,22 +1,27 @@
 require "active_record"
+require "active_support/core_ext/string"
 
 module Temping
   VERSION = "2.0.0"
 
-  def self.included(base)
-    unless ActiveRecord::Base.connected?
+  class << self
+    def create_model(model_name, &block)
+      init unless ActiveRecord::Base.connected?
+
+      model_class = model_name.to_s.classify
+      unless eval("defined?(#{model_class})")
+        factory = ModelFactory.new(model_class, &block)
+        factory.klass
+      end
+    end
+
+    private
+
+    def init
       options = { :adapter => "sqlite3", :database => ":memory:" }
 
       ActiveRecord::Base.configurations["temping"] = options
       ActiveRecord::Base.establish_connection "temping"
-    end
-  end
-
-  def create_model(model_name, &block)
-    model_class = model_name.to_s.classify
-    unless eval("defined?(#{model_class})")
-      factory = ModelFactory.new(model_class, &block)
-      factory.klass
     end
   end
 

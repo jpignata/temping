@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Create temporary table-backed ActiveRecord models for use in tests"
 
   s.add_dependency "activerecord", "~> 3.1.1"
+  s.add_dependency "activesupport", "~> 3.1.1"
   s.add_dependency "sqlite3", "~> 1.3.4"
 
   s.add_development_dependency "rspec", "~> 2.7.0"
