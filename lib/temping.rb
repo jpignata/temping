@@ -19,27 +19,26 @@ class Temping
       options = { :adapter => "sqlite3", :database => ":memory:" }
 
       ActiveRecord::Base.configurations["temping"] = options
-      ActiveRecord::Base.establish_connection "temping"
+      ActiveRecord::Base.establish_connection("temping")
     end
   end
 
   class ModelFactory
     attr_reader :klass
 
-    def initialize(model_class, &block)
+    def initialize(model_name, &block)
       @klass = Class.new(ActiveRecord::Base)
 
-      Object.const_set(model_class, @klass)
+      Object.const_set(model_name, @klass)
       create_table
       add_methods
-
       @klass.class_eval(&block) if block_given?
     end
 
     private
 
     def create_table
-      @klass.connection.create_table(@klass.table_name, :temporary => true) do |table|
+      connection.create_table(table_name, :temporary => true) do |table|
         table.integer :id
       end
     end
@@ -47,13 +46,23 @@ class Temping
     def add_methods
       class << @klass
         def with_columns
-          connection.change_table(table_name) { |table| yield(table) }
+          connection.change_table(table_name) do |table|
+            yield(table)
+          end
         end
 
         def table_exists?
           true
         end
       end
+    end
+
+    def connection
+      @klass.connection
+    end
+
+    def table_name
+      @klass.table_name
     end
   end
 end
