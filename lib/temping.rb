@@ -5,7 +5,7 @@ module Temping
   VERSION = "2.0.0"
 
   class << self
-    def create_model(model_name, &block)
+    def create(model_name, &block)
       connect unless ActiveRecord::Base.connected?
 
       model_class = model_name.to_s.classify
