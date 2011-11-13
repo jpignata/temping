@@ -6,9 +6,12 @@ class Temping
     def create(model_name, &block)
       connect unless ActiveRecord::Base.connected?
 
-      model_class = model_name.to_s.classify
-      unless eval("defined?(#{model_class})")
-        factory = ModelFactory.new(model_class, &block)
+      model_class_name = model_name.to_s.classify
+
+      if eval("defined?(#{model_class_name})")
+        model_class_name.constantize
+      else
+        factory = ModelFactory.new(model_class_name, &block)
         factory.klass
       end
     end
@@ -16,10 +19,12 @@ class Temping
     private
 
     def connect
-      options = { :adapter => "sqlite3", :database => ":memory:" }
-
-      ActiveRecord::Base.configurations["temping"] = options
+      ActiveRecord::Base.configurations["temping"] = database_options
       ActiveRecord::Base.establish_connection("temping")
+    end
+
+    def database_options
+      { :adapter => "sqlite3", :database => ":memory:" }
     end
   end
 

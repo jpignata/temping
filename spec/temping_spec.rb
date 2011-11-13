@@ -1,21 +1,21 @@
 require File.join(File.dirname(__FILE__), "/spec_helper")
 
 describe Temping do
-  describe "#Temping.create" do
-    it "creates and returns an AR::Base-derived model" do
-      post_class = Temping.create :post
+  describe ".create" do
+    it "creates and returns an ActiveRecord model" do
+      post_class = Temping.create(:post)
       post_class.ancestors.should include(ActiveRecord::Base)
       post_class.should == Post
       post_class.table_name.should == "posts"
     end
 
-    it "evals all statements passed in through a block" do
+    it "evaluates block in the model's context" do
       Temping.create :publication do
         with_columns do |table|
           table.string :name
         end
 
-        validates_presence_of :name
+        validates :name, presence: true
       end
 
       publication = Publication.new
@@ -25,13 +25,16 @@ describe Temping do
       publication.should be_valid
     end
 
-    it "silently skips initialization if a const is already defined" do
-      lambda { 2.times { Temping.create :dog } }.should_not raise_error
+    it "silently skips initialization if the constant is already defined" do
+      expect {
+        2.times { Temping.create :dog }
+      }.not_to raise_exception
     end
 
-    it "returns nil if a const is already defined" do
-      Temping.create(:cat)
-      Temping.create(:cat).should be_nil
+    it "returns the model if the constant is already defined" do
+      cat = Temping.create(:cat)
+
+      Temping.create(:cat).should == cat
     end
 
     describe ".with_columns" do
