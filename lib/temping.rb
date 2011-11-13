@@ -6,7 +6,7 @@ module Temping
 
   class << self
     def create_model(model_name, &block)
-      init unless ActiveRecord::Base.connected?
+      connect unless ActiveRecord::Base.connected?
 
       model_class = model_name.to_s.classify
       unless eval("defined?(#{model_class})")
@@ -17,7 +17,7 @@ module Temping
 
     private
 
-    def init
+    def connect
       options = { :adapter => "sqlite3", :database => ":memory:" }
 
       ActiveRecord::Base.configurations["temping"] = options
@@ -30,9 +30,11 @@ module Temping
 
     def initialize(model_class, &block)
       @klass = Class.new(ActiveRecord::Base)
+
       Object.const_set(model_class, @klass)
       create_table
       add_methods
+
       @klass.class_eval(&block) if block_given?
     end
 
