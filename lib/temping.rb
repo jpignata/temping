@@ -1,9 +1,7 @@
 require "active_record"
 require "active_support/core_ext/string"
 
-module Temping
-  VERSION = "2.0.0"
-
+class Temping
   class << self
     def create(model_name, &block)
       connect unless ActiveRecord::Base.connected?
