@@ -1,16 +1,18 @@
-require 'active_record'
+require "active_record"
 
 module Temping
+  VERSION = "2.0.0"
+
   def self.included(base)
     unless ActiveRecord::Base.connected?
-      ActiveRecord::Base.configurations['temping'] = { 
-        :adapter  => 'sqlite3', :database => ':memory:'
-      }    
-      ActiveRecord::Base.establish_connection 'temping' 
+      options = { :adapter => "sqlite3", :database => ":memory:" }
+
+      ActiveRecord::Base.configurations["temping"] = options
+      ActiveRecord::Base.establish_connection "temping"
     end
   end
-  
-  def create_model(model_name, &block)    
+
+  def create_model(model_name, &block)
     model_class = model_name.to_s.classify
     unless eval("defined?(#{model_class})")
       factory = ModelFactory.new(model_class, &block)
@@ -20,7 +22,7 @@ module Temping
 
   class ModelFactory
     attr_reader :klass
-    
+
     def initialize(model_class, &block)
       @klass = Class.new(ActiveRecord::Base)
       Object.const_set(model_class, @klass)
@@ -31,23 +33,22 @@ module Temping
 
     private
 
-      def create_table
-        @klass.connection.create_table(@klass.table_name, :temporary => true) do |table| 
-          table.integer :id
+    def create_table
+      @klass.connection.create_table(@klass.table_name, :temporary => true) do |table|
+        table.integer :id
+      end
+    end
+
+    def add_methods
+      class << @klass
+        def with_columns
+          connection.change_table(table_name) { |table| yield(table) }
+        end
+
+        def table_exists?
+          true
         end
       end
-
-      def add_methods
-        class << @klass
-          def with_columns
-            connection.change_table(table_name) { |table| yield(table) }
-          end
-
-          def table_exists?
-            true
-          end
-        end
-      end
-    
-  end   
+    end
+  end
 end
