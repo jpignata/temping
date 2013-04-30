@@ -2,52 +2,46 @@ require "active_record"
 require "active_support/core_ext/string"
 
 class Temping
-  class << self
-    def create(model_name, &block)
-      connect unless ActiveRecord::Base.connected?
+  VERSION = "3.0.0"
 
-      model_class_name = model_name.to_s.classify
-
-      if eval("defined?(#{model_class_name})")
-        model_class_name.constantize
-      else
-        factory = ModelFactory.new(model_class_name, &block)
-        factory.klass
-      end
+  def self.create(model_name, &block)
+    unless ActiveRecord::Base.connected?
+      ActiveRecord::Base.establish_connection("sqlite3:///:memory:")
     end
 
-    private
-
-    def connect
-      ActiveRecord::Base.configurations["temping"] = database_options
-      ActiveRecord::Base.establish_connection("temping")
-    end
-
-    def database_options
-      { :adapter => "sqlite3", :database => ":memory:" }
-    end
+    factory = ModelFactory.new(model_name.to_s.classify, &block)
+    factory.klass
   end
 
   class ModelFactory
-    attr_reader :klass
-
     def initialize(model_name, &block)
-      @klass = Class.new(ActiveRecord::Base)
+      @model_name = model_name
+      klass.class_eval(&block) if block_given?
+    end
 
-      Object.const_set(model_name, @klass)
-      create_table
-      add_methods
-      @klass.class_eval(&block) if block_given?
+    def klass
+      @klass ||= Object.const_get(@model_name)
+    rescue NameError
+      @klass = build
     end
 
     private
+
+    def build
+      Class.new(ActiveRecord::Base).tap do |klass|
+        Object.const_set(@model_name, klass)
+
+        create_table
+        add_methods
+      end
+    end
 
     def create_table
       connection.create_table(table_name, :temporary => true)
     end
 
     def add_methods
-      class << @klass
+      class << klass
         def with_columns
           connection.change_table(table_name) do |table|
             yield(table)
@@ -61,11 +55,11 @@ class Temping
     end
 
     def connection
-      @klass.connection
+      klass.connection
     end
 
     def table_name
-      @klass.table_name
+      klass.table_name
     end
   end
 end
