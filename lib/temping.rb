@@ -29,6 +29,7 @@ class Temping
       Class.new(ActiveRecord::Base).tap do |klass|
         Object.const_set(@model_name, klass)
 
+        klass.primary_key = :id
         create_table
         add_methods
       end
