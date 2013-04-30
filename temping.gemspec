@@ -1,10 +1,6 @@
-$:.push File.expand_path("../lib", __FILE__)
-
-require "temping"
-
 Gem::Specification.new do |s|
   s.name        = "temping"
-  s.version     = Temping::VERSION
+  s.version     = "3.0.2"
   s.authors     = ["John Pignata"]
   s.email       = "john@pignata.com"
   s.homepage    = "http://github.com/jpignata/temping"

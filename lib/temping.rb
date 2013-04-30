@@ -2,8 +2,6 @@ require "active_record"
 require "active_support/core_ext/string"
 
 class Temping
-  VERSION = "3.0.1"
-
   def self.create(model_name, &block)
     unless ActiveRecord::Base.connected?
       ActiveRecord::Base.establish_connection("sqlite3:///:memory:")
