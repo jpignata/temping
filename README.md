@@ -60,10 +60,12 @@ Temping.create :dog do
 end
 
 Dog.create!
-# => ActiveRecord::RecordInvalid: Validation failed: Name can"t be blank
+
+# => ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
 
 codey = Dog.create! name: "Codey"
 codey.quack
+
 # => "arf!"
 ```
 
