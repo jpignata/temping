@@ -7,11 +7,8 @@ SQL table for use in tests. You may need to do something like this if you're
 testing a module that is meant to be mixed into ActiveReord models without
 relaying on a concrete class.
 
-Temping will use your existing database connection. If one does not exist,
-it will create and connect to an in-memory SQLite3 instance.
-
-As we're using temporary tables all data will be dropped when the database
-connection is terminated.
+Temping will use your existing database connection. As we're using temporary
+tables all data will be dropped when the database connection is terminated.
 
 ## Examples
 
