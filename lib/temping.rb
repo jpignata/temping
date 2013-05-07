@@ -3,10 +3,6 @@ require "active_support/core_ext/string"
 
 class Temping
   def self.create(model_name, &block)
-    unless ActiveRecord::Base.connected?
-      ActiveRecord::Base.establish_connection("sqlite3:///:memory:")
-    end
-
     factory = ModelFactory.new(model_name.to_s.classify, &block)
     factory.klass
   end
