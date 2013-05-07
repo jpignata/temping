@@ -17,25 +17,27 @@ represents the class name of the model you wish to create. By default,
 this will create a temporary table with an _id_ column.
 
 ```ruby
-    Temping.create :dog
+Temping.create :dog
 
-    Dog.create => #<Dog id: 1>
-    Dog.table_name => "dogs"
-    Dog => Dog(id: integer)
+Dog.create => #<Dog id: 1>
+Dog.table_name => "dogs"
+Dog => Dog(id: integer)
 ```
 
 Additional database columns can be specified via the _with_columns_ method
 which uses Rails migration syntax:
 
 ```ruby
-    Temping.create :dog do
-      with_columns do |t|
-        t.string :name
-        t.integer :age, :weight
-      end
-    end
+Temping.create :dog do
+  with_columns do |t|
+    t.string :name
+    t.integer :age, :weight
+  end
+end
 
-    Dog.create => #<Dog id: 1, name: nil, age: nil, weight: nil>
+Dog.create 
+
+# => #<Dog id: 1, name: nil, age: nil, weight: nil>
 ```
 
 When a block is passed to _create_, it is evaluated in the context of the class.
@@ -44,32 +46,34 @@ accomplished in the block including method definitions, validations, module
 includes, etc.
 
 ```ruby
-    Temping.create :dog do
-      validates :name, presence: true
+Temping.create :dog do
+  validates :name, presence: true
 
-      include Duckish
+  with_columns do |t|
+    t.string :name
+    t.integer :age, :weight
+  end
 
-      with_columns do |t|
-        t.string :name
-        t.integer :age, :weight
-      end
+  def quack
+    "arf!"
+  end
+end
 
-      def quack
-        "arf!"
-      end
-    end
+Dog.create!
+# => ActiveRecord::RecordInvalid: Validation failed: Name can"t be blank
 
-    Dog.create! => ActiveRecord::RecordInvalid: Validation failed: Name can"t be blank
-
-    codey = Dog.create! name: "Codey"
-    codey.quack => "arf!"
+codey = Dog.create! name: "Codey"
+codey.quack
+# => "arf!"
 ```
 
 ## Installation
 
 In your Gemfile:
 
-    gem "temping"
+```ruby
+gem "temping"
+```
 
 ## Bugs, Features, Feedback
 
