@@ -16,15 +16,18 @@ The basic setup of a model involves calling _create_ with a symbol that
 represents the class name of the model you wish to create. By default,
 this will create a temporary table with an _id_ column.
 
+```ruby
     Temping.create :dog
 
     Dog.create => #<Dog id: 1>
     Dog.table_name => "dogs"
     Dog => Dog(id: integer)
+```
 
 Additional database columns can be specified via the _with_columns_ method
 which uses Rails migration syntax:
 
+```ruby
     Temping.create :dog do
       with_columns do |t|
         t.string :name
@@ -33,12 +36,14 @@ which uses Rails migration syntax:
     end
 
     Dog.create => #<Dog id: 1, name: nil, age: nil, weight: nil>
+```
 
 When a block is passed to _create_, it is evaluated in the context of the class.
 This means anything you do in an ActiveRecord model class body can be
 accomplished in the block including method definitions, validations, module
 includes, etc.
 
+```ruby
     Temping.create :dog do
       validates :name, presence: true
 
@@ -58,6 +63,7 @@ includes, etc.
 
     codey = Dog.create! name: "Codey"
     codey.quack => "arf!"
+```
 
 ## Installation
 
