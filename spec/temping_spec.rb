@@ -61,7 +61,7 @@ describe Temping do
           add_index(:count, :unique => true)
         end
 
-        Comment.connection.index_exists?(:index_tests, :count, :unique => true).should be_true
+        IndexTest.connection.index_exists?(:index_tests, :count, :unique => true).should be_true
       end
     end
   end
