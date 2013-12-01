@@ -50,5 +50,19 @@ describe Temping do
         Comment.columns.map(&:name).should include("count", "headline", "body")
       end
     end
+
+    describe ".add_index" do
+      it "creates indexes on the given column(s) with the given options" do
+        Temping.create :index_test do
+          with_columns do |table|
+            table.integer :count
+          end
+
+          add_index(:count, :unique => true)
+        end
+
+        Comment.connection.index_exists?(:index_tests, :count, :unique => true).should be_true
+      end
+    end
   end
 end
