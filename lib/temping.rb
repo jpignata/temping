@@ -32,7 +32,7 @@ class Temping
     end
 
     def create_table
-      connection.create_table(table_name, :temporary => true)
+      connection.create_table(table_name, :temporary => true) do; end
     end
 
     def add_methods
