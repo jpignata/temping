@@ -10,7 +10,7 @@
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
 SQL table for use in tests. You may need to do something like this if you're
 testing a module that is meant to be mixed into ActiveReord models without
-relaying on a concrete class.
+relying on a concrete class.
 
 Temping will use your existing database connection. As we're using temporary
 tables all data will be dropped when the database connection is terminated.
@@ -40,7 +40,7 @@ Temping.create :dog do
   end
 end
 
-Dog.create 
+Dog.create
 
 # => #<Dog id: 1, name: nil, age: nil, weight: nil>
 ```
