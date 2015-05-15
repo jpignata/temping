@@ -82,6 +82,18 @@ In your Gemfile:
 gem "temping"
 ```
 
+In `test_helper.rb` add the following block to `ActiveSupport::TestCase`:
+
+```ruby
+class ActiveSupport::TestCase
+  # ...
+  teardown do
+    Temping.teardown
+  end
+  # ...
+end
+```
+
 ## Bugs, Features, Feedback
 
 Tickets can be submitted by via GitHub issues.

@@ -50,5 +50,25 @@ describe Temping do
         Comment.columns.map(&:name).should include("count", "headline", "body")
       end
     end
+
+    describe ".teardown" do
+      it "undefines the models" do
+        Temping.create :user do
+          with_columns do |table|
+            table.string :email
+          end
+        end
+
+        # Store the connection because a call to teardown will undefine the
+        # User model.
+        connection = User.connection
+
+        Temping.teardown
+
+        connection.temporary_table_exists?(:users).should be_false
+        Object.const_defined?(:User).should be_false
+      end
+    end
+
   end
 end
