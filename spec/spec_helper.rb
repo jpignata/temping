@@ -1,9 +1,18 @@
 $: << File.join(File.dirname(__FILE__), "/../lib")
 
 require "bundler/setup"
+require_relative 'test_config'
 require "temping"
 
-ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+RSpec.configure do |config|
+  config.before(:suite) do
+    ActiveRecord::Base.establish_connection(TestConfig.current_config)
+  end
+
+  config.after(:suite) do
+    ActiveRecord::Base.remove_connection
+  end
+end
 
 # The #temporary_table_exists? is required by the spec. The implementation
 # provided by Rails doesn't work for temporary tables in SQLite as they are not
@@ -27,7 +36,7 @@ module ActiveRecord::ConnectionAdapters
     end
   end
 
-  class SQLite3Adapter
+  class SQLite3Adapter < AbstractAdapter
     def temporary_tables(name = nil, table_name = nil) #:nodoc:
       sql = <<-SQL
               SELECT name

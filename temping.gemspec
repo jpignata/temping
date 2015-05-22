@@ -15,6 +15,9 @@ Gem::Specification.new do |s|
     s.add_development_dependency "activerecord-jdbcsqlite3-adapter", "~> 1.2.9"
   else
     s.add_development_dependency "sqlite3", "~> 1.3.10"
+    s.add_development_dependency "pg", "~> 0.18.2"
+    s.add_development_dependency "mysql", "~> 2.9.1"
+    s.add_development_dependency "mysql2", "~> 0.3.18"
   end
 
   s.add_development_dependency "rspec", ">= 2.13.0"
