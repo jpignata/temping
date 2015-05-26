@@ -96,4 +96,5 @@ end
 
 ## Bugs, Features, Feedback
 
-Tickets can be submitted by via GitHub issues.
+All contributions are welcome! Please take a look at `CONTRIBUTING.md` for some
+tips.
