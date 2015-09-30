@@ -94,6 +94,18 @@ class ActiveSupport::TestCase
 end
 ```
 
+Or, if you're using `rspec`, in `spec_helper.rb` add the following block to `RSpec.configure`:
+
+```ruby
+Rspec.configure do |config|
+  # ...
+  config.after do
+    Temping.teardown
+  end
+  # ...
+end
+```
+
 ## Bugs, Features, Feedback
 
 All contributions are welcome! Please take a look at `CONTRIBUTING.md` for some
