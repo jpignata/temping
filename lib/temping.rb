@@ -25,6 +25,7 @@ class Temping
     def initialize(model_name, &block)
       @model_name = model_name
       klass.class_eval(&block) if block_given?
+      klass.reset_column_information
     end
 
     def klass

@@ -49,6 +49,25 @@ describe Temping do
 
         Comment.columns.map(&:name).should include("count", "headline", "body")
       end
+
+      it "resets column information" do
+        Temping.create :human do
+          with_columns do |table|
+            table.integer :head_count
+          end
+        end
+
+        Human.columns.map(&:name).should include("head_count")
+
+        Temping.create :human do
+          with_columns do |table|
+            table.string :name
+            table.text :body
+          end
+        end
+
+        Human.columns.map(&:name).should include("name", "body")
+      end
     end
 
     describe ".teardown" do
