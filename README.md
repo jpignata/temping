@@ -9,7 +9,7 @@
 
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
 SQL table for use in tests. You may need to do something like this if you're
-testing a module that is meant to be mixed into ActiveReord models without
+testing a module that is meant to be mixed into ActiveRecord models without
 relying on a concrete class.
 
 Temping will use your existing database connection. As we're using temporary
