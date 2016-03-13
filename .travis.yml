@@ -1,9 +1,9 @@
 language: ruby
 rvm:
+  - 2.3
   - 2.2
   - 2.1
-  - 2.0
-  - 1.9
+
 before_script:
   - bundle exec rake db:mysql:create
   - bundle exec rake db:postgresql:create
