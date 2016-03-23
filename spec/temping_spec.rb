@@ -7,6 +7,13 @@ describe Temping do
       post_class.ancestors.should include(ActiveRecord::Base)
       post_class.should == Post
       post_class.table_name.should == "posts"
+      post_class.connection.primary_key(:posts).should == "id"
+    end
+
+    it "creates table with given options" do
+      mushroom_class = Temping.create(:mushroom, primary_key: :guid)
+      mushroom_class.table_name.should == "mushrooms"
+      mushroom_class.connection.primary_key(:mushrooms).should == "guid"
     end
 
     it "evaluates block in the model's context" do
