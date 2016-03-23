@@ -4,8 +4,8 @@ require "active_support/core_ext/string"
 class Temping
   @model_klasses = []
 
-  def self.create(model_name, &block)
-    factory = ModelFactory.new(model_name.to_s.classify, &block)
+  def self.create(model_name, options = {}, &block)
+    factory = ModelFactory.new(model_name.to_s.classify, options, &block)
     klass = factory.klass
     @model_klasses << klass
     klass
@@ -22,8 +22,9 @@ class Temping
   end
 
   class ModelFactory
-    def initialize(model_name, &block)
+    def initialize(model_name, options = {}, &block)
       @model_name = model_name
+      @options = options
       klass.class_eval(&block) if block_given?
       klass.reset_column_information
     end
@@ -41,13 +42,14 @@ class Temping
         Object.const_set(@model_name, klass)
 
         klass.primary_key = :id
-        create_table
+        create_table(@options)
         add_methods
       end
     end
 
-    def create_table
-      connection.create_table(table_name, :temporary => true)
+    DEFAULT_OPTIONS = { :temporary => true }
+    def create_table(options = {})
+      connection.create_table(table_name, DEFAULT_OPTIONS.merge(options))
     end
 
     def add_methods
