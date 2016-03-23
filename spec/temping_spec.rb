@@ -4,16 +4,16 @@ describe Temping do
   describe ".create" do
     it "creates and returns an ActiveRecord model" do
       post_class = Temping.create(:post)
-      post_class.ancestors.should include(ActiveRecord::Base)
-      post_class.should == Post
-      post_class.table_name.should == "posts"
-      post_class.connection.primary_key(:posts).should == "id"
+      expect(post_class.ancestors).to include(ActiveRecord::Base)
+      expect(post_class).to eq Post
+      expect(post_class.table_name).to eq "posts"
+      expect(post_class.connection.primary_key(:posts)).to eq "id"
     end
 
     it "creates table with given options" do
       mushroom_class = Temping.create(:mushroom, primary_key: :guid)
-      mushroom_class.table_name.should == "mushrooms"
-      mushroom_class.connection.primary_key(:mushrooms).should == "guid"
+      expect(mushroom_class.table_name).to eq "mushrooms"
+      expect(mushroom_class.connection.primary_key(:mushrooms)).to eq "guid"
     end
 
     it "evaluates block in the model's context" do
@@ -26,10 +26,10 @@ describe Temping do
       end
 
       publication = Publication.new
-      publication.should_not be_valid
-      publication.errors.full_messages.should include("Name can't be blank")
+      expect(publication).to_not be_valid
+      expect(publication.errors.full_messages).to include("Name can't be blank")
       publication.name = "The New York Times"
-      publication.should be_valid
+      expect(publication).to be_valid
     end
 
     it "silently skips initialization if the constant is already defined" do
@@ -41,7 +41,7 @@ describe Temping do
     it "returns the model if the constant is already defined" do
       cat = Temping.create(:cat)
 
-      Temping.create(:cat).should == cat
+      expect(Temping.create(:cat)).to eq cat
     end
 
     describe ".with_columns" do
@@ -54,7 +54,7 @@ describe Temping do
           end
         end
 
-        Comment.columns.map(&:name).should include("count", "headline", "body")
+        expect(Comment.columns.map(&:name)).to include("count", "headline", "body")
       end
 
       it "resets column information" do
@@ -64,7 +64,7 @@ describe Temping do
           end
         end
 
-        Human.columns.map(&:name).should include("head_count")
+        expect(Human.columns.map(&:name)).to include("head_count")
 
         Temping.create :human do
           with_columns do |table|
@@ -73,7 +73,7 @@ describe Temping do
           end
         end
 
-        Human.columns.map(&:name).should include("name", "body")
+        expect(Human.columns.map(&:name)).to include("name", "body")
       end
     end
 
@@ -91,8 +91,8 @@ describe Temping do
 
         Temping.teardown
 
-        connection.temporary_table_exists?(:users).should be_false
-        Object.const_defined?(:User).should be_false
+        expect(connection.temporary_table_exists?(:users)).to be_falsey
+        expect(Object.const_defined?(:User)).to be_falsey
       end
     end
 

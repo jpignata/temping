@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
     s.add_development_dependency "mysql2", "~> 0.3.18"
   end
 
-  s.add_development_dependency "rspec", ">= 2.13.0"
+  s.add_development_dependency "rspec", ">= 3.4.0"
   s.add_development_dependency "rake", ">= 10.0.4"
 end
