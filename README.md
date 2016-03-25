@@ -106,6 +106,12 @@ Rspec.configure do |config|
 end
 ```
 
+Alternatively you may want to just cleanup tables, but keep defined models:
+
+```ruby
+Temping.cleanup
+```
+
 ## Bugs, Features, Feedback
 
 All contributions are welcome! Please take a look at `CONTRIBUTING.md` for some
