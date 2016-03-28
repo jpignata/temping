@@ -4,6 +4,9 @@ User-visible changes worth mentioning.
 
 ---
 ## 3.4.0 - 2016-03-23
+- Add `Temping.cleanup` method - Thanks @bolshakov - #39
+
+## 3.4.0 - 2016-03-23
 - Add abiltity to override create_table options - Thanks @bolshakov - #38
 
 ## 3.3.1 - 2016-03-23

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    temping (3.4.0)
+    temping (3.5.0)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
 
