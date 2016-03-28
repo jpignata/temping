@@ -4,21 +4,27 @@ require "active_support/core_ext/string"
 class Temping
   @model_klasses = []
 
-  def self.create(model_name, options = {}, &block)
-    factory = ModelFactory.new(model_name.to_s.classify, options, &block)
-    klass = factory.klass
-    @model_klasses << klass
-    klass
-  end
-
-  def self.teardown
-    @model_klasses.each do |klass|
-      if Object.const_defined?(klass.name)
-        klass.connection.drop_table(klass.table_name)
-        Object.send(:remove_const, klass.name)
-      end
+  class << self
+    def create(model_name, options = {}, &block)
+      factory = ModelFactory.new(model_name.to_s.classify, options, &block)
+      klass = factory.klass
+      @model_klasses << klass
+      klass
     end
-    @model_klasses.clear
+
+    def teardown
+      @model_klasses.each do |klass|
+        if Object.const_defined?(klass.name)
+          klass.connection.drop_table(klass.table_name)
+          Object.send(:remove_const, klass.name)
+        end
+      end
+      @model_klasses.clear
+    end
+
+    def cleanup
+      @model_klasses.each(&:destroy_all)
+    end
   end
 
   class ModelFactory

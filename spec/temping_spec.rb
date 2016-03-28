@@ -96,5 +96,24 @@ describe Temping do
       end
     end
 
+    describe ".cleanup" do
+      before :all do
+        Temping.create(:user)
+      end
+
+      it "destroys all models" do
+        expect do
+          Temping.cleanup
+        end.not_to change { defined?(User) }
+      end
+
+      it "keeps constans and tables" do
+        User.create!
+
+        expect do
+          Temping.cleanup
+        end.to change { User.count }.from(1).to(0)
+      end
+    end
   end
 end
