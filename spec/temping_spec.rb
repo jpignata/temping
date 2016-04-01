@@ -94,6 +94,42 @@ describe Temping do
         expect(connection.temporary_table_exists?(:users)).to be_falsey
         expect(Object.const_defined?(:User)).to be_falsey
       end
+
+      it 'clears the reflections cache' do
+        Temping.create :user do
+          has_many :posts
+        end
+
+        Temping.create :posts do
+          with_columns do |table|
+            table.references :user
+          end
+        end
+
+        User.joins(:posts).to_a
+
+        Temping.teardown
+
+        Temping.create :user do
+          has_many :posts
+          has_many :comments, through: :posts
+        end
+
+        Temping.create :posts do
+          with_columns do |table|
+            table.references :user
+          end
+          has_many :comments
+        end
+
+        Temping.create :comments do
+          with_columns do |table|
+            table.references :post
+          end
+        end
+
+        expect { User.joins(:comments).to_a }.not_to raise_error
+      end
     end
 
     describe ".cleanup" do

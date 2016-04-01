@@ -13,13 +13,16 @@ class Temping
     end
 
     def teardown
-      @model_klasses.each do |klass|
-        if Object.const_defined?(klass.name)
-          klass.connection.drop_table(klass.table_name)
-          Object.send(:remove_const, klass.name)
+      if @model_klasses.any?
+        @model_klasses.each do |klass|
+          if Object.const_defined?(klass.name)
+            klass.connection.drop_table(klass.table_name)
+            Object.send(:remove_const, klass.name)
+          end
         end
+        @model_klasses.clear
+        ActiveSupport::Dependencies.clear
       end
-      @model_klasses.clear
     end
 
     def cleanup
