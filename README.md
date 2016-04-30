@@ -97,7 +97,7 @@ end
 Or, if you're using `rspec`, in `spec_helper.rb` add the following block to `RSpec.configure`:
 
 ```ruby
-Rspec.configure do |config|
+RSpec.configure do |config|
   # ...
   config.after do
     Temping.teardown
