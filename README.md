@@ -29,6 +29,15 @@ Dog.table_name => "dogs"
 Dog => Dog(id: integer)
 ```
 
+Keep in mind, the table name will always be pluralized, while the class name will be singular.
+
+```ruby
+Temping.create :dogs
+
+Dog.table_name => "dogs"
+Dogs => NameError: uninitialized constant Dogs
+```
+
 Additional database columns can be specified via the _with_columns_ method
 which uses Rails migration syntax:
 
