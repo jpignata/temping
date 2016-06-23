@@ -4,10 +4,48 @@ describe Temping do
   describe ".create" do
     it "creates and returns an ActiveRecord model" do
       post_class = Temping.create(:post)
-      expect(post_class.ancestors).to include(ActiveRecord::Base)
       expect(post_class).to eq Post
       expect(post_class.table_name).to eq "posts"
       expect(post_class.connection.primary_key(:posts)).to eq "id"
+    end
+
+    context "when the ActiveRecord major version is less than 5" do
+      before { stub_const("ActiveRecord::VERSION::MAJOR", 4) }
+
+      it "creates a model that inherits from ActiveRecord::Base" do
+        puppy_class = Temping.create(:puppy)
+        expect(puppy_class.superclass).to eq(ActiveRecord::Base)
+      end
+    end
+
+    context "when the ActiveRecord major version is greater than 4" do
+      before { stub_const("ActiveRecord::VERSION::MAJOR", 5) }
+
+      context "when ApplicationRecord is defined" do
+        before do
+          unless defined?(ApplicationRecord)
+            class ApplicationRecord < ActiveRecord::Base; end
+          end
+        end
+
+        it "creates a model that inherits from ApplicationRecord" do
+          kitty_class = Temping.create(:kittens)
+          expect(kitty_class.superclass).to eq(ApplicationRecord)
+        end
+      end
+
+      context "when ApplicationRecord is not defined" do
+        before do
+          if defined?(ApplicationRecord)
+            Object.send(:remove_const, :ApplicationRecord)
+          end
+        end
+
+        it "creates a model that inherits from ActiveRecord::Base" do
+          gerbil_class = Temping.create(:gerbil)
+          expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
+        end
+      end
     end
 
     it "creates table with given options" do

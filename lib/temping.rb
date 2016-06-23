@@ -44,12 +44,20 @@ class Temping
     private
 
     def build
-      Class.new(ActiveRecord::Base).tap do |klass|
+      Class.new(model_parent_class).tap do |klass|
         Object.const_set(@model_name, klass)
 
         klass.primary_key = :id
         create_table(@options)
         add_methods
+      end
+    end
+
+    def model_parent_class
+      if ActiveRecord::VERSION::MAJOR > 4 && defined?(ApplicationRecord)
+        ApplicationRecord
+      else
+        ActiveRecord::Base
       end
     end
 
