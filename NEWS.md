@@ -3,7 +3,10 @@
 User-visible changes worth mentioning.
 
 ---
-## 3.4.0 - 2016-03-23
+## 3.6.0 - 2016-03-23
+- Add support for Rails 5 ApplicationRecord - Thanks @bryanwoods - #44
+
+## 3.5.0 - 2016-03-23
 - Add `Temping.cleanup` method - Thanks @bolshakov - #39
 
 ## 3.4.0 - 2016-03-23
