@@ -54,7 +54,7 @@ class Temping
     end
 
     def model_parent_class
-      if ActiveRecord::VERSION::MAJOR > 4
+      if ActiveRecord::VERSION::MAJOR > 4 && defined?(ApplicationRecord)
         ApplicationRecord
       else
         ActiveRecord::Base

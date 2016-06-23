@@ -1,12 +1,6 @@
 require File.join(File.dirname(__FILE__), "/spec_helper")
 
 describe Temping do
-  before do
-    unless defined?(ApplicationRecord)
-      class ApplicationRecord < ActiveRecord::Base; end
-    end
-  end
-
   describe ".create" do
     it "creates and returns an ActiveRecord model" do
       post_class = Temping.create(:post)
@@ -27,9 +21,30 @@ describe Temping do
     context "when the ActiveRecord major version is greater than 4" do
       before { stub_const("ActiveRecord::VERSION::MAJOR", 5) }
 
-      it "creates a model that inherits from ApplicationRecord" do
-        kitty_class = Temping.create(:kittens)
-        expect(kitty_class.superclass).to eq(ApplicationRecord)
+      context "when ApplicationRecord is defined" do
+        before do
+          unless defined?(ApplicationRecord)
+            class ApplicationRecord < ActiveRecord::Base; end
+          end
+        end
+
+        it "creates a model that inherits from ApplicationRecord" do
+          kitty_class = Temping.create(:kittens)
+          expect(kitty_class.superclass).to eq(ApplicationRecord)
+        end
+      end
+
+      context "when ApplicationRecord is not defined" do
+        before do
+          if defined?(ApplicationRecord)
+            Object.send(:remove_const, :ApplicationRecord)
+          end
+        end
+
+        it "creates a model that inherits from ActiveRecord::Base" do
+          gerbil_class = Temping.create(:gerbil)
+          expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
+        end
       end
     end
 
