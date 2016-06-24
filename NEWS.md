@@ -3,6 +3,9 @@
 User-visible changes worth mentioning.
 
 ---
+## 3.6.1 - 2016-03-24
+- Fixed unexpected model reflections caching - Thanks @faucct - #40
+
 ## 3.6.0 - 2016-03-23
 - Add support for Rails 5 ApplicationRecord - Thanks @bryanwoods - #44
 
