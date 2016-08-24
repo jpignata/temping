@@ -3,6 +3,9 @@
 User-visible changes worth mentioning.
 
 ---
+## 3.7.1 - 2016-08-24
+- Primary key fix. Properly set primary key in table when creating it.
+
 ## 3.7.0 - 2016-08-24
 - Option to clear dependencies cache on `teardown` - #47, #45
 
