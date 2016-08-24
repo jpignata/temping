@@ -4,10 +4,6 @@ sqlite3:
 postgresql:
   database: temping_test
 
-mysql:
-  database: temping_test
-  username: root
-
 mysql2:
   database: temping_test
   username: root
