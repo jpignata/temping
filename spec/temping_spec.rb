@@ -146,7 +146,7 @@ describe Temping do
 
         User.joins(:posts).to_a
 
-        Temping.teardown
+        Temping.teardown(clear_dependencies: true)
 
         Temping.create :user do
           has_many :posts
