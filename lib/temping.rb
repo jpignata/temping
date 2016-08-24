@@ -50,7 +50,7 @@ class Temping
       Class.new(model_parent_class).tap do |klass|
         Object.const_set(@model_name, klass)
 
-        klass.primary_key = :id
+        klass.primary_key = @options[:primary_key] || :id
         create_table(@options)
         add_methods
       end

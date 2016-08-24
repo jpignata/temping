@@ -6,7 +6,7 @@ describe Temping do
       post_class = Temping.create(:post)
       expect(post_class).to eq Post
       expect(post_class.table_name).to eq "posts"
-      expect(post_class.connection.primary_key(:posts)).to eq "id"
+      expect(post_class.primary_key).to eq "id"
     end
 
     context "when the ActiveRecord major version is less than 5" do
@@ -51,7 +51,7 @@ describe Temping do
     it "creates table with given options" do
       mushroom_class = Temping.create(:mushroom, primary_key: :guid)
       expect(mushroom_class.table_name).to eq "mushrooms"
-      expect(mushroom_class.connection.primary_key(:mushrooms)).to eq "guid"
+      expect(mushroom_class.primary_key).to eq "guid"
     end
 
     it "evaluates block in the model's context" do
