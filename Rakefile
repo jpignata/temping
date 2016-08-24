@@ -28,11 +28,11 @@ namespace :db do
 
   namespace :mysql do
     task :create do
-      %x(mysql --user=#{TestConfig['mysql']['username']} --execute="CREATE DATABASE #{TestConfig['mysql']['database']} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci")
+      %x(mysql --user=#{TestConfig['mysql2']['username']} --execute="CREATE DATABASE #{TestConfig['mysql2']['database']} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci")
     end
 
     task :drop do
-      %x(mysql --user=#{TestConfig['mysql']['username']} --execute="DROP DATABASE #{TestConfig['mysql']['database']}")
+      %x(mysql --user=#{TestConfig['mysql2']['username']} --execute="DROP DATABASE #{TestConfig['mysql2']['database']}")
     end
   end
 end
