@@ -3,6 +3,9 @@
 User-visible changes worth mentioning.
 
 ---
+## 3.7.0 - 2016-08-24
+- Option to clear dependencies cache on `teardown` - #47, #45
+
 ## 3.6.1 - 2016-03-24
 - Fixed unexpected model reflections caching - Thanks @faucct - #40
 
