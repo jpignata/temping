@@ -146,7 +146,8 @@ describe Temping do
 
         User.joins(:posts).to_a
 
-        Temping.teardown(clear_dependencies: true)
+        AUTOLOADABLE_CONSTANT
+        expect { Temping.teardown }.not_to change { defined?(AUTOLOADABLE_CONSTANT) }
 
         Temping.create :user do
           has_many :posts

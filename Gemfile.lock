@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    temping (3.7.1)
+    temping (3.8.0)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
 
@@ -19,11 +19,11 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    arel (7.1.1)
-    concurrent-ruby (1.0.2)
+    arel (7.1.4)
+    concurrent-ruby (1.0.4)
     diff-lcs (1.2.5)
-    i18n (0.7.0)
-    minitest (5.9.0)
+    i18n (0.8.0)
+    minitest (5.10.1)
     mysql (2.9.1)
     mysql2 (0.3.20)
     pg (0.18.4)
@@ -59,4 +59,4 @@ DEPENDENCIES
   temping!
 
 BUNDLED WITH
-   1.12.5
+   1.14.3
