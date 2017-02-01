@@ -83,6 +83,16 @@ codey.quack
 # => "arf!"
 ```
 
+All attributes you can pass to `create_table` can be evaulated too. For example you can create a dog with a primary key of the type uuid:
+
+```ruby
+Temping.create :dog, id: :uuid, default: -> { 'uuid_generate_v4()' }
+
+Dog.create
+
+# => #<Dog id: d937951b-765c-4bc9-804e-3171d22117b0>
+```
+
 ## Installation
 
 In your Gemfile:
