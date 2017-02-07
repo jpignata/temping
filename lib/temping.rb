@@ -12,7 +12,7 @@ class Temping
       klass
     end
 
-    def teardown(clear_dependencies: false)
+    def teardown
       if @model_klasses.any?
         @model_klasses.each do |klass|
           if Object.const_defined?(klass.name)
@@ -21,7 +21,7 @@ class Temping
           end
         end
         @model_klasses.clear
-        ActiveSupport::Dependencies.clear if clear_dependencies
+        ActiveSupport::Dependencies::Reference.clear!
       end
     end
 

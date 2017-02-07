@@ -14,6 +14,8 @@ RSpec.configure do |config|
   end
 end
 
+ActiveSupport::Dependencies.autoload_paths << File.join(__dir__, 'autoload')
+
 # The #temporary_table_exists? is required by the spec. The implementation
 # provided by Rails doesn't work for temporary tables in SQLite as they are not
 # visible in sqlite_master. sqlite_temp_master is the right table to query. An
