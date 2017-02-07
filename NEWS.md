@@ -3,6 +3,11 @@
 User-visible changes worth mentioning.
 
 ---
+## 3.8.0 - 2017-02-07
+- Always clear dependencies on `Temping.teardown` using 
+  `ActiveSupport::Dependencies::Reference.clear!` - Thanks @faucct - #49
+- Remove `clear_dependencies` option from `Temping.teardown`
+
 ## 3.7.1 - 2016-08-24
 - Primary key fix. Properly set primary key in table when creating it.
 
