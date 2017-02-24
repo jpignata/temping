@@ -47,7 +47,7 @@ class Temping
     private
 
     def build
-      Class.new(model_parent_class).tap do |klass|
+      Class.new(@options.fetch(:model_parent_class, model_parent_class)).tap do |klass|
         Object.const_set(@model_name, klass)
 
         klass.primary_key = @options[:primary_key] || :id
