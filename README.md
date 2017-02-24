@@ -83,7 +83,7 @@ codey.quack
 # => "arf!"
 ```
 
-All attributes you can pass to `create_table` can be evaulated too. For example you can create a dog with a primary key of the type uuid:
+All attributes you can pass to `create_table` can be evaluated too. For example you can create a dog with a primary key of the type uuid:
 
 ```ruby
 Temping.create :dog, id: :uuid, default: -> { 'uuid_generate_v4()' }
