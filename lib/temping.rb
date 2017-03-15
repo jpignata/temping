@@ -47,7 +47,7 @@ class Temping
     private
 
     def build
-      Class.new(model_parent_class).tap do |klass|
+      Class.new(@options.fetch(:parent_class, default_parent_class)).tap do |klass|
         Object.const_set(@model_name, klass)
 
         klass.primary_key = @options[:primary_key] || :id
@@ -56,7 +56,7 @@ class Temping
       end
     end
 
-    def model_parent_class
+    def default_parent_class
       if ActiveRecord::VERSION::MAJOR > 4 && defined?(ApplicationRecord)
         ApplicationRecord
       else

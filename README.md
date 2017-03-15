@@ -93,6 +93,38 @@ Dog.create
 # => #<Dog id: d937951b-765c-4bc9-804e-3171d22117b0>
 ```
 
+## Options
+
+An option to specify the parent class can be given as a second parameter to `Temping.create`. This allows testing in environments where models inherit from a common base class.
+
+```ruby
+# A custom base model class
+class Vehicle < ActiveRecord::Base
+  self.abstract_class = true
+  def navigate_to(destination)
+    # non-vehicle specific logic
+  end
+end
+
+Temping.create :car, parent_class: Vehicle do
+  with_columns do |t|
+    t.string :name
+    t.integer :num_wheels
+  end
+end
+Temping.create :bus, parent_class: Vehicle do
+  with_columns do |t|
+    t.string :name
+    t.integer :num_wheels
+  end
+end
+
+my_car = Car.create
+my_car.navigate_to(:home)
+```
+
+
+
 ## Installation
 
 In your Gemfile:
