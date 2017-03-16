@@ -1,3 +1,4 @@
+# coding: utf-8
 require File.join(File.dirname(__FILE__), "/spec_helper")
 
 describe Temping do
@@ -45,6 +46,28 @@ describe Temping do
           gerbil_class = Temping.create(:gerbil)
           expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
         end
+      end
+    end
+
+    context "with a custom parent class" do
+      before do
+        unless defined?(TestBaseClass)
+          class TestBaseClass < ActiveRecord::Base
+            self.abstract_class = true
+          end
+        end
+      end
+      after do
+        Object.send(:remove_const, :TestBaseClass)
+      end
+      it 'uses the provided parent class option' do
+        child_class = Temping.create(:test_child, parent_class: TestBaseClass)
+        expect(child_class.superclass).to eq(TestBaseClass)
+        expect(child_class.new).to be_an(TestBaseClass)
+      end
+      it 'doesn’t affect other types' do
+          gerbil_class = Temping.create(:gerbil)
+          expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
       end
     end
 
