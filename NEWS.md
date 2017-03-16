@@ -3,6 +3,10 @@
 User-visible changes worth mentioning.
 
 ---
+
+## 3.9.0 - 2017-03-16
+- Add option for specifying parent class - Thanks @nathanstitt - #53
+
 ## 3.8.0 - 2017-02-07
 - Always clear dependencies on `Temping.teardown` using 
   `ActiveSupport::Dependencies::Reference.clear!` - Thanks @faucct - #49
