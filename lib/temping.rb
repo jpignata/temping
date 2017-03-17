@@ -80,6 +80,10 @@ class Temping
         def table_exists?
           true
         end
+
+        def add_index(column_name, options = {})
+          connection.add_index(table_name, column_name, options)
+        end
       end
     end
 

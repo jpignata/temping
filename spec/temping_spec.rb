@@ -213,5 +213,19 @@ describe Temping do
         end.to change { User.count }.from(1).to(0)
       end
     end
+
+    describe ".add_index" do
+      it "creates indexes on the given column(s) with the given options" do
+        Temping.create :index_test do
+          with_columns do |table|
+            table.integer :count
+          end
+
+          add_index(:count, :unique => true)
+        end
+
+        IndexTest.connection.index_exists?(:index_tests, :count, :unique => true).should be_true
+      end
+    end
   end
 end
