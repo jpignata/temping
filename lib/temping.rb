@@ -26,7 +26,19 @@ class Temping
     end
 
     def cleanup
-      @model_klasses.each(&:destroy_all)
+      if @model_klasses.any?
+        @model_klasses.each { |klass| truncate_table(klass.connection, klass.table_name) }
+      end
+    end
+
+    private
+
+    def truncate_table(connection, table_name)
+      if connection.class.name.include?('SQLite3Adapter')
+        connection.execute("DELETE FROM #{table_name};")
+      else
+        connection.execute("TRUNCATE TABLE #{table_name};")
+      end
     end
   end
 
