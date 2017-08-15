@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
 
   s.files = ["lib/temping.rb"]
 
-  s.add_dependency "activerecord", ">= 3.1"
-  s.add_dependency "activesupport", ">= 3.1"
+  s.add_dependency "activerecord", ">= 4.2"
+  s.add_dependency "activesupport", ">= 4.2"
 
   if RUBY_PLATFORM =~ /java/
     s.add_development_dependency "activerecord-jdbcsqlite3-adapter", "~> 1.2.9"
