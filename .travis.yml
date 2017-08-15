@@ -1,13 +1,17 @@
 before_install:
   - gem install bundler 
 
+before_script:
+  - bundle exec rake db:mysql:create
+  - bundle exec rake db:postgresql:create
+
 language: ruby
 rvm:
   - 2.4.1
   - 2.3.4
-  - 2.2
+  - 2.2.7
 
-
-before_script:
-  - bundle exec rake db:mysql:create
-  - bundle exec rake db:postgresql:create
+env:
+  - "RAILS_VERSION=4.2.0"
+  - "RAILS_VERSION=5.0.0"
+  - "RAILS_VERSION=5.1.0"
