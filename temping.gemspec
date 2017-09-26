@@ -5,6 +5,7 @@ Gem::Specification.new do |s|
   s.email       = "john@pignata.com"
   s.homepage    = "http://github.com/jpignata/temping"
   s.summary     = "Create temporary table-backed ActiveRecord models for use in tests"
+  s.license     = "MIT"
 
   s.files = ["lib/temping.rb"]
 
