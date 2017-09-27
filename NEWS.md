@@ -4,9 +4,10 @@ User-visible changes worth mentioning.
 
 ---
 
-## Unreleased
+## 3.10.0 - 2017-09-27
 - Drop support for `mysql`, just test `mysql2`
 - Drop support for Rails 3.1, 3.2, 4.0, and 4.1
+- Add license to gemspec - Thanks @leapingfrogs - #56
 
 ## 3.9.0 - 2017-03-16
 - Add option for specifying parent class - Thanks @nathanstitt - #53
