@@ -192,6 +192,21 @@ describe Temping do
 
         expect { User.joins(:comments).to_a }.not_to raise_error
       end
+
+      context "when foreign key constraints exist" do
+        before do
+          Temping.create(:containers)
+          Temping.create(:items) do
+            with_columns do |t|
+              t.references :container, foreign_key: true
+            end
+          end
+        end
+
+        it "undefines the models" do
+          expect { Temping.teardown }.not_to raise_error
+        end
+      end
     end
 
     describe ".cleanup" do

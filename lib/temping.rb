@@ -14,7 +14,7 @@ class Temping
 
     def teardown
       if @model_klasses.any?
-        @model_klasses.each do |klass|
+        @model_klasses.reverse.each do |klass|
           if Object.const_defined?(klass.name)
             klass.connection.drop_table(klass.table_name)
             Object.send(:remove_const, klass.name)
