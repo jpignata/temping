@@ -66,7 +66,7 @@ class Temping
 
     DEFAULT_OPTIONS = { :temporary => true }
     def create_table(options = {})
-      connection.create_table(table_name, DEFAULT_OPTIONS.merge(options))
+      connection.create_table(table_name, **DEFAULT_OPTIONS.merge(options))
     end
 
     def add_methods
