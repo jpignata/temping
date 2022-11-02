@@ -1,7 +1,6 @@
 # Temping
 
 [![Code Climate](https://codeclimate.com/github/jpignata/temping.png)](https://codeclimate.com/github/jpignata/temping)
-[![Build Status](https://travis-ci.org/jpignata/temping.png?branch=master)](https://travis-ci.org/jpignata/temping)
 [![Gem Version](https://badge.fury.io/rb/temping.png)](http://badge.fury.io/rb/temping)
 
 
