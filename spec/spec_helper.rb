@@ -6,10 +6,36 @@ require "temping"
 
 RSpec.configure do |config|
   config.before(:suite) do
-    ActiveRecord::Base.establish_connection(TestConfig.current_config)
+    config = TestConfig.current_config
+    puts "Testing adapter version #{TestConfig.current_adapter_version} " \
+         "(ruby #{RUBY_PLATFORM} #{RUBY_VERSION}, " \
+         "ActiveRecord #{ActiveRecord::VERSION::STRING}, " \
+         "gemfile #{ENV['BUNDLE_GEMFILE']})"
+    case config['adapter']
+    when 'mysql2'
+      ActiveRecord::Base.establish_connection(config.except('database'))
+      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config['database']} " \
+                                            "DEFAULT CHARACTER SET utf8 " \
+                                            "DEFAULT COLLATE utf8_unicode_ci")
+    when 'postgresql'
+      ActiveRecord::Base.establish_connection(config.except('database'))
+      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config['database']} " \
+                                            "ENCODING = 'UTF8'" \
+                                            "TEMPLATE 'template0'")
+    end
+    ActiveRecord::Base.establish_connection(config)
   end
 
   config.after(:suite) do
+    config = TestConfig.current_config
+    case config['adapter']
+    when 'mysql2'
+      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config['database']}")
+    when 'postgresql'
+      ActiveRecord::Base.remove_connection
+      ActiveRecord::Base.establish_connection(config.except('database').merge('database': 'template1'))
+      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config['database']}")
+    end
     ActiveRecord::Base.remove_connection
   end
 end

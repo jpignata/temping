@@ -1,38 +1,15 @@
 require 'rspec/core/rake_task'
 require_relative 'spec/test_config'
 
-task :default => [:spec]
+task default: [:spec]
 
-task :spec => TestConfig.adapters.map { |adapter| "spec:#{adapter}"}
+task spec: TestConfig.adapter_versions.map { |adapter_version| "spec:#{adapter_version}" }
 
-TestConfig.adapters.each do |adapter|
+TestConfig.adapter_versions.each do |adapter_version|
   namespace :spec do
-    RSpec::Core::RakeTask.new(adapter) do |spec|
-      puts "Testing adapter #{adapter}\n\n"
-      TestConfig.current_adapter = adapter
+    RSpec::Core::RakeTask.new(adapter_version) do |spec|
+      TestConfig.current_adapter_version = adapter_version
       spec.rspec_opts = '--colour'
-    end
-  end
-end
-
-namespace :db do
-  namespace :postgresql do
-    task :create do
-      %x(createdb -E UTF8 -T template0 #{TestConfig['postgresql']['database']})
-    end
-
-    task :drop do
-      %x(dropdb #{TestConfig['postgresql']['database']})
-    end
-  end
-
-  namespace :mysql do
-    task :create do
-      %x(mysql --user=#{TestConfig['mysql2']['username']} --execute="CREATE DATABASE #{TestConfig['mysql2']['database']} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci")
-    end
-
-    task :drop do
-      %x(mysql --user=#{TestConfig['mysql2']['username']} --execute="DROP DATABASE #{TestConfig['mysql2']['database']}")
     end
   end
 end
