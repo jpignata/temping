@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  mysql80:
+    image: "mysql:8.0.31"
+    ports:
+      - "13316:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  mysql57:
+    image: "mysql:5.7.40"
+    ports:
+      - "13317:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  mysql56:
+    image: "mysql:5.6.51"
+    ports:
+      - "13318:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  mysql55:
+    image: "mysql:5.5.62"
+    ports:
+      - "13319:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  postgres15:
+    image: "postgres:15"
+    ports:
+      - "15442:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  postgres14:
+    image: "postgres:14"
+    ports:
+      - "15443:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  postgres13:
+    image: "postgres:13"
+    ports:
+      - "15444:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  postgres12:
+    image: "postgres:12"
+    ports:
+      - "15445:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  postgres11:
+    image: "postgres:11"
+    ports:
+      - "15446:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+  postgres10:
+    image: "postgres:10"
+    ports:
+      - "15447:5432"
+    environment:
+      POSTGRES_PASSWORD: password

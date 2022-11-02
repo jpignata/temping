@@ -1,11 +1,8 @@
 # Temping
 
 [![Code Climate](https://codeclimate.com/github/jpignata/temping.png)](https://codeclimate.com/github/jpignata/temping)
-[![Build Status](https://travis-ci.org/jpignata/temping.png?branch=master)](https://travis-ci.org/jpignata/temping)
+[![Build Status](https://github.com/jpignata/temping/workflows/tests/badge.svg)](https://github.com/jpignata/temping/actions)
 [![Gem Version](https://badge.fury.io/rb/temping.png)](http://badge.fury.io/rb/temping)
-
-
-## Description
 
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
 SQL table for use in tests. You may need to do something like this if you're
@@ -162,6 +159,23 @@ Alternatively you may want to just cleanup tables, but keep defined models:
 ```ruby
 Temping.cleanup
 ```
+
+## Support
+
+The latest version of this gem is tested with the following interpreters/gems:
+
+* ruby-3.1 with ActiveRecord 7.0, 6.1
+* ruby-3.0 with ActiveRecord 7.0, 6.1
+* ruby-2.7 with ActiveRecord 7.0, 6.1, 6.0
+* ruby-2.6 with ActiveRecord 6.1, 6.0
+* ruby-2.5 with ActiveRecord 6.1, 6.0
+* jruby with ActiveRecord 6.1, 6.0 (activerecord-jdbc-adapter)
+
+with the following database systems:
+
+* SQLite3
+* MySQL (versions 5.5-8.0)
+* PostgreSQL (versions 10-15)
 
 ## Bugs, Features, Feedback
 
