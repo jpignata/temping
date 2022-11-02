@@ -5,6 +5,7 @@ User-visible changes worth mentioning.
 ---
 
 ## Unreleased
+- Add support for Ruby 3.0 and above
 - Drop support for Ruby below 2.5
 - Drop support for Rails below 6.0
 
