@@ -1,4 +1,4 @@
-# News
+# Changelog
 
 User-visible changes worth mentioning.
 
