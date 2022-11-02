@@ -1,9 +1,73 @@
-sqlite3:
+sqlite:
+  adapter: sqlite3
   database: ":memory:"
-
-postgresql:
-  database: temping_test
-
-mysql2:
+mysql8.0:
+  adapter: mysql2
+  host: 127.0.0.1
   database: temping_test
   username: root
+  password: password
+  port: 13316
+mysql5.7:
+  adapter: mysql2
+  host: 127.0.0.1
+  database: temping_test
+  username: root
+  password: password
+  port: 13317
+mysql5.6:
+  adapter: mysql2
+  host: 127.0.0.1
+  database: temping_test
+  username: root
+  password: password
+  port: 13318
+mysql5.5:
+  adapter: mysql2
+  host: 127.0.0.1
+  database: temping_test
+  username: root
+  password: password
+  port: 13319
+postgresql15:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15442
+postgresql14:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15443
+postgresql13:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15444
+postgresql12:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15445
+postgresql11:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15446
+postgresql10:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15447

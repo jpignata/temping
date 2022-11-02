@@ -1,0 +1,77 @@
+name: tests
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ruby: 3.1
+            gemfile: gemfiles/activerecord_7.0.gemfile
+          - ruby: 3.1
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/activerecord_7.0.gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/activerecord_7.0.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/activerecord_6.0.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 2.6
+            gemfile: gemfiles/activerecord_6.0.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 2.5
+            gemfile: gemfiles/activerecord_6.0.gemfile
+          - ruby: jruby
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: jruby
+            gemfile: gemfiles/activerecord_6.0.gemfile
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dependencies
+        run: |
+          # Start docker container
+          for i in {1..60}; do docker-compose up -d && break; sleep 1; done
+          # Wait until database servers start
+          function mysql80_ping { mysqladmin -u root -h 127.0.0.1 -P 13316 ping; }
+          function mysql57_ping { mysqladmin -u root -h 127.0.0.1 -P 13317 ping; }
+          function mysql56_ping { mysqladmin -u root -h 127.0.0.1 -P 13318 ping; }
+          function mysql55_ping { mysqladmin -u root -h 127.0.0.1 -P 13319 ping; }
+          function pg15_ping { pg_isready -U postgres -h 127.0.0.1 -p 15442; }
+          function pg14_ping { pg_isready -U postgres -h 127.0.0.1 -p 15443; }
+          function pg13_ping { pg_isready -U postgres -h 127.0.0.1 -p 15444; }
+          function pg12_ping { pg_isready -U postgres -h 127.0.0.1 -p 15445; }
+          function pg11_ping { pg_isready -U postgres -h 127.0.0.1 -p 15446; }
+          function pg10_ping { pg_isready -U postgres -h 127.0.0.1 -p 15447; }
+          for i in {1..60}; do mysql80_ping && break; sleep 1; done
+          for i in {1..60}; do mysql57_ping && break; sleep 1; done
+          for i in {1..60}; do mysql56_ping && break; sleep 1; done
+          for i in {1..60}; do mysql55_ping && break; sleep 1; done
+          for i in {1..60}; do pg15_ping && break; sleep 1; done
+          for i in {1..60}; do pg14_ping && break; sleep 1; done
+          for i in {1..60}; do pg13_ping && break; sleep 1; done
+          for i in {1..60}; do pg12_ping && break; sleep 1; done
+          for i in {1..60}; do pg11_ping && break; sleep 1; done
+          for i in {1..60}; do pg10_ping && break; sleep 1; done
+        env:
+          MYSQL_PWD: password
+          PGPASSWORD: password
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run tests
+        run: ${{ matrix.env }} bundle exec rake
+        env:
+          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
