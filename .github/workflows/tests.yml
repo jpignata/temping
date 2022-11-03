@@ -60,40 +60,14 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup MySQL and PostgreSQL
-        run: |
-          # Start docker container
-          for i in {1..60}; do docker-compose up -d && break; sleep 1; done
-          # Wait until database servers start
-          function mysql80_ping { mysqladmin -u root -h 127.0.0.1 -P 13316 ping; }
-          function mysql57_ping { mysqladmin -u root -h 127.0.0.1 -P 13317 ping; }
-          function mysql56_ping { mysqladmin -u root -h 127.0.0.1 -P 13318 ping; }
-          function mysql55_ping { mysqladmin -u root -h 127.0.0.1 -P 13319 ping; }
-          function pg15_ping { pg_isready -U postgres -h 127.0.0.1 -p 15442; }
-          function pg14_ping { pg_isready -U postgres -h 127.0.0.1 -p 15443; }
-          function pg13_ping { pg_isready -U postgres -h 127.0.0.1 -p 15444; }
-          function pg12_ping { pg_isready -U postgres -h 127.0.0.1 -p 15445; }
-          function pg11_ping { pg_isready -U postgres -h 127.0.0.1 -p 15446; }
-          function pg10_ping { pg_isready -U postgres -h 127.0.0.1 -p 15447; }
-          for i in {1..60}; do mysql80_ping && break; sleep 1; done
-          for i in {1..60}; do mysql57_ping && break; sleep 1; done
-          for i in {1..60}; do mysql56_ping && break; sleep 1; done
-          for i in {1..60}; do mysql55_ping && break; sleep 1; done
-          for i in {1..60}; do pg15_ping && break; sleep 1; done
-          for i in {1..60}; do pg14_ping && break; sleep 1; done
-          for i in {1..60}; do pg13_ping && break; sleep 1; done
-          for i in {1..60}; do pg12_ping && break; sleep 1; done
-          for i in {1..60}; do pg11_ping && break; sleep 1; done
-          for i in {1..60}; do pg10_ping && break; sleep 1; done
-        env:
-          MYSQL_PWD: password
-          PGPASSWORD: password
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup MySQL and PostgreSQL via Docker Compose
+        run: docker compose up -d --wait
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Run tests
         run: ${{ matrix.env }} bundle exec rake
-        env:
-          BUNDLE_GEMFILE: ${{ matrix.gemfile }}
