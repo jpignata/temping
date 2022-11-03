@@ -8,8 +8,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     config = TestConfig.current_config
     puts "Testing adapter version #{TestConfig.current_adapter_version} " \
-         "(ruby #{RUBY_DESCRIPTION}, " \
-         "ActiveRecord #{ActiveRecord::VERSION::STRING}, " \
+         "(#{RUBY_DESCRIPTION}, ActiveRecord #{ActiveRecord::VERSION::STRING}, " \
          "gemfile #{ENV['BUNDLE_GEMFILE']})"
     case config['adapter']
     when 'mysql2'
