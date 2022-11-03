@@ -21,7 +21,7 @@ class Temping
           end
         end
         @model_klasses.clear
-        ActiveSupport::Dependencies::Reference.clear!
+        ActiveSupport::Dependencies::Reference.clear! if ActiveRecord::VERSION::MAJOR < 7
       end
     end
 

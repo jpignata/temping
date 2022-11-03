@@ -40,7 +40,9 @@ RSpec.configure do |config|
   end
 end
 
-ActiveSupport::Dependencies.autoload_paths << File.join(__dir__, 'autoload')
+if ActiveRecord::VERSION::MAJOR < 7
+  ActiveSupport::Dependencies.autoload_paths << File.join(__dir__, 'autoload')
+end
 
 # The #temporary_table_exists? is required by the spec. The implementation
 # provided by Rails doesn't work for temporary tables in SQLite as they are not
