@@ -51,11 +51,17 @@ jobs:
             gemfile: gemfiles/activerecord_6.1.gemfile
           - ruby: 'jruby'
             gemfile: gemfiles/activerecord_6.0.gemfile
+          - ruby: 'truffleruby'
+            gemfile: gemfiles/activerecord_7.0.gemfile
+          - ruby: 'truffleruby'
+            gemfile: gemfiles/activerecord_6.1.gemfile
+          - ruby: 'truffleruby'
+            gemfile: gemfiles/activerecord_6.0.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup dependencies
+      - uses: actions/checkout@v3
+      - name: Setup MySQL and PostgreSQL
         run: |
           # Start docker container
           for i in {1..60}; do docker-compose up -d && break; sleep 1; done
