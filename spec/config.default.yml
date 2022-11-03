@@ -6,28 +6,28 @@ mysql8.0:
   host: 127.0.0.1
   database: temping_test
   username: root
-  password: password
+  password:
   port: 13316
 mysql5.7:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
-  password: password
+  password:
   port: 13317
 mysql5.6:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
-  password: password
+  password:
   port: 13318
 mysql5.5:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
-  password: password
+  password:
   port: 13319
 postgresql15:
   adapter: postgresql
