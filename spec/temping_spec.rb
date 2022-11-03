@@ -10,42 +10,29 @@ describe Temping do
       expect(post_class.primary_key).to eq "id"
     end
 
-    context "when the ActiveRecord major version is less than 5" do
-      before { stub_const("ActiveRecord::VERSION::MAJOR", 4) }
+    context "when ApplicationRecord is defined" do
+      before do
+        unless defined?(ApplicationRecord)
+          class ApplicationRecord < ActiveRecord::Base; end
+        end
+      end
 
-      it "creates a model that inherits from ActiveRecord::Base" do
-        puppy_class = Temping.create(:puppy)
-        expect(puppy_class.superclass).to eq(ActiveRecord::Base)
+      it "creates a model that inherits from ApplicationRecord" do
+        kitty_class = Temping.create(:kittens)
+        expect(kitty_class.superclass).to eq(ApplicationRecord)
       end
     end
 
-    context "when the ActiveRecord major version is greater than 4" do
-      before { stub_const("ActiveRecord::VERSION::MAJOR", 5) }
-
-      context "when ApplicationRecord is defined" do
-        before do
-          unless defined?(ApplicationRecord)
-            class ApplicationRecord < ActiveRecord::Base; end
-          end
-        end
-
-        it "creates a model that inherits from ApplicationRecord" do
-          kitty_class = Temping.create(:kittens)
-          expect(kitty_class.superclass).to eq(ApplicationRecord)
+    context "when ApplicationRecord is not defined" do
+      before do
+        if defined?(ApplicationRecord)
+          Object.send(:remove_const, :ApplicationRecord)
         end
       end
 
-      context "when ApplicationRecord is not defined" do
-        before do
-          if defined?(ApplicationRecord)
-            Object.send(:remove_const, :ApplicationRecord)
-          end
-        end
-
-        it "creates a model that inherits from ActiveRecord::Base" do
-          gerbil_class = Temping.create(:gerbil)
-          expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
-        end
+      it "creates a model that inherits from ActiveRecord::Base" do
+        gerbil_class = Temping.create(:gerbil)
+        expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
       end
     end
 
@@ -57,17 +44,20 @@ describe Temping do
           end
         end
       end
+
       after do
         Object.send(:remove_const, :TestBaseClass)
       end
+
       it 'uses the provided parent class option' do
         child_class = Temping.create(:test_child, parent_class: TestBaseClass)
         expect(child_class.superclass).to eq(TestBaseClass)
         expect(child_class.new).to be_an(TestBaseClass)
       end
+
       it 'doesn’t affect other types' do
-          gerbil_class = Temping.create(:gerbil)
-          expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
+        gerbil_class = Temping.create(:gerbil)
+        expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
       end
     end
 
