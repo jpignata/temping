@@ -7,8 +7,8 @@ User-visible changes worth mentioning.
 ## Unreleased
 - Add support for Ruby 3.0 and above
 - Add support for Rails 7.0
-- Drop support for Ruby below 2.5
-- Drop support for Rails below 6.0
+- Drop support for Ruby below 2.0
+- Drop support for Rails 4.2, 5.0, and 5.1
 
 ## 3.10.0 - 2017-09-27
 - Drop support for `mysql`, just test `mysql2`

@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
 
   s.files = ["lib/temping.rb"]
 
-  s.required_ruby_version = ">= 2.5"
+  s.required_ruby_version = ">= 2.0"
 
-  s.add_dependency "activerecord", ">= 6.0", "< 7.1"
+  s.add_dependency "activerecord", ">= 5.2", "< 7.1"
 
   s.add_development_dependency "appraisal"
 
@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
     s.add_development_dependency "activerecord-jdbcpostgresql-adapter", ">= 60.0"
     s.add_development_dependency "activerecord-jdbcmysql-adapter", ">= 60.0"
   else
-    s.add_development_dependency "sqlite3", "~> 1.5"
-    s.add_development_dependency "pg", "~> 1.4"
+    s.add_development_dependency "sqlite3", ">= 1.3", "< 2.0"
+    s.add_development_dependency "pg", ">= 1.2", "< 2.0"
     s.add_development_dependency "mysql2", "~> 0.5"
   end
 

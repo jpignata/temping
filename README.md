@@ -164,11 +164,13 @@ Temping.cleanup
 
 The latest version of this gem is tested with the following interpreters/gems:
 
+* ruby-3.2 with ActiveRecord 7.0
 * ruby-3.1 with ActiveRecord 7.0, 6.1
 * ruby-3.0 with ActiveRecord 7.0, 6.1
 * ruby-2.7 with ActiveRecord 7.0, 6.1, 6.0
 * ruby-2.6 with ActiveRecord 6.1, 6.0
 * ruby-2.5 with ActiveRecord 6.1, 6.0
+* ruby-2.4 with ActiveRecord 5.2
 * jruby with ActiveRecord 6.1, 6.0 (activerecord-jdbc-adapter)
 
 with the following database systems:
@@ -176,6 +178,9 @@ with the following database systems:
 * SQLite3
 * MySQL (versions 5.5-8.0)
 * PostgreSQL (versions 10-15)
+
+If you need to support older versions of ruby or ActiveRecord you might have to use
+the older versions of this gem (3.10.0 or below).
 
 ## Bugs, Features, Feedback
 
