@@ -164,14 +164,15 @@ Temping.cleanup
 
 The latest version of this gem is tested with the following interpreters/gems:
 
-* ruby-3.2 with ActiveRecord 7.0
-* ruby-3.1 with ActiveRecord 7.0, 6.1
-* ruby-3.0 with ActiveRecord 7.0, 6.1
-* ruby-2.7 with ActiveRecord 7.0, 6.1, 6.0
-* ruby-2.6 with ActiveRecord 6.1, 6.0
-* ruby-2.5 with ActiveRecord 6.1, 6.0
-* ruby-2.4 with ActiveRecord 5.2
-* jruby with ActiveRecord 6.1, 6.0 (activerecord-jdbc-adapter)
+* MRI 3.2 with ActiveRecord 7.0
+* MRI 3.1 with ActiveRecord 7.0, 6.1
+* MRI 3.0 with ActiveRecord 7.0, 6.1
+* MRI 2.7 with ActiveRecord 7.0, 6.1, 6.0
+* MRI 2.6 with ActiveRecord 6.1, 6.0
+* MRI 2.5 with ActiveRecord 6.1, 6.0
+* MRI 2.4 with ActiveRecord 5.2
+* JRuby with ActiveRecord 6.1, 6.0 (activerecord-jdbc-adapter)
+* TruffleRuby with ActiveRecord 7.0, 6.1, 6.0
 
 with the following database systems:
 
