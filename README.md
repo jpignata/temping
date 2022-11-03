@@ -1,7 +1,7 @@
 # Temping
 
 [![Code Climate](https://codeclimate.com/github/jpignata/temping.png)](https://codeclimate.com/github/jpignata/temping)
-[![Build Status](https://github.com/jpignata/temping/workflows/tests/badge.svg)](https://github.com/jpignata/temping/actions)
+[![Build Status](https://github.com/jpignata/temping/workflows/tests/badge.svg?branch=master)](https://github.com/jpignata/temping/actions)
 [![Gem Version](https://badge.fury.io/rb/temping.png)](http://badge.fury.io/rb/temping)
 
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
