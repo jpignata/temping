@@ -169,8 +169,12 @@ describe Temping do
 
         User.joins(:posts).to_a
 
-        AUTOLOADABLE_CONSTANT
-        expect { Temping.teardown }.not_to change { defined?(AUTOLOADABLE_CONSTANT) }
+        if ActiveRecord::VERSION::MAJOR < 7
+          AUTOLOADABLE_CONSTANT
+          expect { Temping.teardown }.not_to change { defined?(AUTOLOADABLE_CONSTANT) }
+        else
+          Temping.teardown
+        end
 
         Temping.create :user do
           has_many :posts
