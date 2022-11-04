@@ -186,6 +186,11 @@ describe Temping do
 
         expect { User.joins(:comments).to_a }.not_to raise_error
       end
+
+      it "does not raise errors if called more than once" do
+        Temping.create :user
+        expect { 2.times { Temping.teardown } }.not_to raise_error
+      end
     end
 
     describe ".cleanup" do
