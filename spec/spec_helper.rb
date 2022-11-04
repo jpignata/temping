@@ -1,7 +1,13 @@
+require "simplecov"
+SimpleCov.start do
+  enable_coverage :branch
+  add_filter "test_config.rb"
+end
+
 $: << File.join(File.dirname(__FILE__), "/../lib")
 
 require "bundler/setup"
-require_relative 'test_config'
+require_relative "test_config"
 require "temping"
 
 RSpec.configure do |config|
