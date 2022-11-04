@@ -15,50 +15,51 @@ on:
       - README.md
 
 jobs:
-  build:
+  tests:
+    name: Run tests (ruby ${{ matrix.ruby }}, rails ${{ matrix.rails }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
           - ruby: '3.2'
-            gemfile: gemfiles/activerecord_7.0.gemfile
+            rails: '7.0'
           - ruby: '3.1'
-            gemfile: gemfiles/activerecord_7.0.gemfile
+            rails: '7.0'
           - ruby: '3.1'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: '3.0'
-            gemfile: gemfiles/activerecord_7.0.gemfile
+            rails: '7.0'
           - ruby: '3.0'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: '2.7'
-            gemfile: gemfiles/activerecord_7.0.gemfile
+            rails: '7.0'
           - ruby: '2.7'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: '2.7'
-            gemfile: gemfiles/activerecord_6.0.gemfile
+            rails: '6.0'
           - ruby: '2.6'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: '2.6'
-            gemfile: gemfiles/activerecord_6.0.gemfile
+            rails: '6.0'
           - ruby: '2.5'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: '2.5'
-            gemfile: gemfiles/activerecord_6.0.gemfile
+            rails: '6.0'
           - ruby: '2.4'
-            gemfile: gemfiles/activerecord_5.2.gemfile
+            rails: '5.2'
           - ruby: 'jruby'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: 'jruby'
-            gemfile: gemfiles/activerecord_6.0.gemfile
+            rails: '6.0'
           - ruby: 'truffleruby'
-            gemfile: gemfiles/activerecord_7.0.gemfile
+            rails: '7.0'
           - ruby: 'truffleruby'
-            gemfile: gemfiles/activerecord_6.1.gemfile
+            rails: '6.1'
           - ruby: 'truffleruby'
-            gemfile: gemfiles/activerecord_6.0.gemfile
+            rails: '6.0'
     env:
-      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      BUNDLE_GEMFILE: gemfiles/activerecord_${{ matrix.rails }}.gemfile
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -71,3 +72,51 @@ jobs:
           bundler-cache: true
       - name: Run tests
         run: ${{ matrix.env }} bundle exec rake
+      - name: Upload code coverage results as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}
+          path: coverage/.resultset.json
+  coverage:
+    name: Calculate test coverage
+    needs: tests
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: gemfiles/activerecord_7.0.gemfile
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: coverage-resultsets
+      - name: Display structure of downloaded files
+        run: ls -Rla
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+      - name: Collate coverage reports
+        run: ${{ matrix.env }} bundle exec rake ci:coverage:collate
+      - name: Upload total code coverage result as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-total
+          path: coverage/.last_run.json
+      - name: Fetch total coverage values from simplecov files
+        id: coverage
+        run: |
+          echo "COVERAGE_LINE=$(cat coverage/.last_run.json | jq '.result.line')" >> $GITHUB_OUTPUT
+          echo "COVERAGE_BRANCH=$(cat coverage/.last_run.json | jq '.result.branch')" >> $GITHUB_OUTPUT
+      - name: Print total coverage
+        run: |
+          echo "Total line test coverage: ${{ steps.coverage.outputs.COVERAGE_LINE }}%"
+          echo "Total branch test coverage: ${{ steps.coverage.outputs.COVERAGE_BRANCH }}%"
+      - name: Fail if coverage is less than 100%
+        if: steps.coverage.outputs.COVERAGE_LINE != 100 || steps.coverage.outputs.COVERAGE_BRANCH != 100
+        uses: actions/github-script@v6
+        with:
+          script: "core.setFailed('Please make sure test coverage is 100%. \
+                                   Currently: ${{ steps.coverage.outputs.COVERAGE_LINE }}% (line), \
+                                   ${{ steps.coverage.outputs.COVERAGE_BRANCH }}% (branch).')"

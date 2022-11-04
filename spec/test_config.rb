@@ -23,14 +23,14 @@ module TestConfig
       ENV['TEMPING_ADAPTER_VERSION'] = adapter_version
     end
 
-    private
-
     def config
       @config ||= YAML.safe_load(File.read(config_path))
     end
+    private :config
 
     def config_path
       File.join(File.dirname(__FILE__), 'config.default.yml')
     end
+    private :config_path
   end
 end
