@@ -22,7 +22,7 @@ to start the container. Once the container is up and running you can run
 $ rake
 ``` 
 
-to run the whole test suite. 
+to run the whole test suite including StandardRB linter. 
 
 If you want to test a particular database adapter version run
 `rake spec:<adapter version>`, e.g. `rake spec:mysql8.0` 

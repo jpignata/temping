@@ -1,4 +1,4 @@
-require 'yaml'
+require "yaml"
 
 module TestConfig
   class << self
@@ -16,11 +16,11 @@ module TestConfig
     # The adapter is chosen by the parent process but tested by the child process. Using an
     # environment variable is the simplest way of passing a value from the parent to the child.
     def current_adapter_version
-      ENV.fetch('TEMPING_ADAPTER_VERSION')
+      ENV.fetch("TEMPING_ADAPTER_VERSION")
     end
 
     def current_adapter_version=(adapter_version)
-      ENV['TEMPING_ADAPTER_VERSION'] = adapter_version
+      ENV["TEMPING_ADAPTER_VERSION"] = adapter_version
     end
 
     def config
@@ -29,7 +29,7 @@ module TestConfig
     private :config
 
     def config_path
-      File.join(File.dirname(__FILE__), 'config.default.yml')
+      File.join(File.dirname(__FILE__), "config.default.yml")
     end
     private :config_path
   end
