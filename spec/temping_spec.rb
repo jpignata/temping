@@ -1,4 +1,3 @@
-# coding: utf-8
 require File.join(File.dirname(__FILE__), "/spec_helper")
 
 describe Temping do
@@ -49,13 +48,13 @@ describe Temping do
         Object.send(:remove_const, :TestBaseClass)
       end
 
-      it 'uses the provided parent class option' do
+      it "uses the provided parent class option" do
         child_class = Temping.create(:test_child, parent_class: TestBaseClass)
         expect(child_class.superclass).to eq(TestBaseClass)
         expect(child_class.new).to be_an(TestBaseClass)
       end
 
-      it 'doesn’t affect other types' do
+      it "doesn’t affect other types" do
         gerbil_class = Temping.create(:gerbil)
         expect(gerbil_class.superclass).to eq(ActiveRecord::Base)
       end
@@ -146,7 +145,7 @@ describe Temping do
         expect(Object.const_defined?(:User)).to be_falsey
       end
 
-      it 'clears the reflections cache' do
+      it "clears the reflections cache" do
         Temping.create :user do
           has_many :posts
         end
@@ -160,7 +159,7 @@ describe Temping do
         User.joins(:posts).to_a
 
         if ActiveRecord::VERSION::MAJOR < 7
-          AUTOLOADABLE_CONSTANT
+          expect { AUTOLOADABLE_CONSTANT }.not_to raise_error
           expect { Temping.teardown }.not_to change { defined?(AUTOLOADABLE_CONSTANT) }
         else
           Temping.teardown

@@ -15,16 +15,16 @@ RSpec.configure do |config|
     config = TestConfig.current_config
     puts "Testing adapter version #{TestConfig.current_adapter_version} " \
          "(#{RUBY_DESCRIPTION}, ActiveRecord #{ActiveRecord::VERSION::STRING}, " \
-         "gemfile #{ENV['BUNDLE_GEMFILE']})"
-    case config['adapter']
-    when 'mysql2'
-      ActiveRecord::Base.establish_connection(config.except('database'))
-      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config['database']} " \
+         "gemfile #{ENV["BUNDLE_GEMFILE"]})"
+    case config["adapter"]
+    when "mysql2"
+      ActiveRecord::Base.establish_connection(config.except("database"))
+      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config["database"]} " \
                                             "DEFAULT CHARACTER SET utf8 " \
                                             "DEFAULT COLLATE utf8_unicode_ci")
-    when 'postgresql'
-      ActiveRecord::Base.establish_connection(config.except('database'))
-      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config['database']} " \
+    when "postgresql"
+      ActiveRecord::Base.establish_connection(config.except("database"))
+      ActiveRecord::Base.connection.execute("CREATE DATABASE #{config["database"]} " \
                                             "ENCODING = 'UTF8'" \
                                             "TEMPLATE 'template0'")
     end
@@ -33,20 +33,20 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     config = TestConfig.current_config
-    case config['adapter']
-    when 'mysql2'
-      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config['database']}")
-    when 'postgresql'
+    case config["adapter"]
+    when "mysql2"
+      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config["database"]}")
+    when "postgresql"
       ActiveRecord::Base.remove_connection
-      ActiveRecord::Base.establish_connection(config.except('database').merge('database': 'template1'))
-      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config['database']}")
+      ActiveRecord::Base.establish_connection(config.except("database").merge(database: "template1"))
+      ActiveRecord::Base.connection.execute("DROP DATABASE IF EXISTS #{config["database"]}")
     end
     ActiveRecord::Base.remove_connection
   end
 end
 
 if ActiveRecord::VERSION::MAJOR < 7
-  ActiveSupport::Dependencies.autoload_paths << File.join(__dir__, 'autoload')
+  ActiveSupport::Dependencies.autoload_paths << File.join(__dir__, "autoload")
 end
 
 # The #temporary_table_exists? is required by the spec. The implementation
@@ -72,7 +72,7 @@ module ActiveRecord::ConnectionAdapters
   end
 
   class SQLite3Adapter < AbstractAdapter
-    def temporary_tables(name = nil, table_name = nil) #:nodoc:
+    def temporary_tables(name = nil, table_name = nil) # :nodoc:
       sql = <<-SQL
               SELECT name
               FROM sqlite_temp_master
@@ -80,8 +80,8 @@ module ActiveRecord::ConnectionAdapters
       SQL
       sql << " AND name = #{quote_table_name(table_name)}" if table_name
 
-      exec_query(sql, 'SCHEMA').map do |row|
-        row['name']
+      exec_query(sql, "SCHEMA").map do |row|
+        row["name"]
       end
     end
 

@@ -34,7 +34,7 @@ class Temping
     def initialize(model_name, options = {}, &block)
       @model_name = model_name
       @options = options
-      klass.class_eval(&block) if block_given?
+      klass.class_eval(&block) if block
       klass.reset_column_information
     end
 
@@ -64,7 +64,7 @@ class Temping
       end
     end
 
-    DEFAULT_OPTIONS = { :temporary => true }
+    DEFAULT_OPTIONS = {temporary: true}
     def create_table(options = {})
       connection.create_table(table_name, **DEFAULT_OPTIONS.merge(options))
     end
