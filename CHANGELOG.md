@@ -5,7 +5,9 @@ User-visible changes worth mentioning.
 ---
 
 ## Unreleased
-- Add support for Ruby 3.0 and above
+- Fix `.teardown` and `.cleanup` methods to process models in the reverse order 
+(last in, first out) - Thanks @gregnavis
+- Add support for Ruby 3.0 and above - Thanks @dark-panda
 - Add support for Rails 7.0
 - Drop support for Ruby below 2.0
 - Drop support for Rails 4.2, 5.0, and 5.1
