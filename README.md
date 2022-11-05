@@ -120,7 +120,24 @@ my_car = Car.create
 my_car.navigate_to(:home)
 ```
 
+## Foreign Keys
 
+Temporary tables in [MySQL](https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html) 
+cannot have foreign keys. PostgreSQL supports them though.
+If you want to use foreign keys with Temping in MySQL you might want to consider 
+making tables permanent by overwriting `temporary` option when you set up a model:
+
+```ruby
+Temping.create :user, temporary: false
+Temping.create :post, temporary: false do
+  with_columns do |t|
+    t.references :user, foreign_key: true
+  end
+end
+```
+
+This however is not a recommended approach because the whole idea of Temping 
+is about using **temporary** tables.
 
 ## Installation
 

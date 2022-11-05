@@ -13,7 +13,7 @@ If you want to run the tests manually please first make sure you have Docker
 installed and then run
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d --wait
 ```
 
 to start the container. Once the container is up and running you can run 
