@@ -4,7 +4,7 @@ User-visible changes worth mentioning.
 
 ---
 
-## Unreleased
+## 4.0.0 - 2022-11-06
 - [#79](https://github.com/jpignata/temping/pull/79): Support namespaces
 - [#77](https://github.com/jpignata/temping/pull/77): Fix `.teardown` and `.cleanup` methods to process 
 models in the reverse order  - Thanks @gregnavis
@@ -13,6 +13,8 @@ models in the reverse order  - Thanks @gregnavis
 - [#69](https://github.com/jpignata/temping/pull/69), 
 [#81](https://github.com/jpignata/temping/pull/81): 
 Drop support for Ruby below 2.2.2 and Rails below 5.2
+
+[(full changelog since previous version)](https://github.com/jpignata/temping/compare/v3.10.0...v4.0.0)
 
 ## 3.10.0 - 2017-09-27
 - Drop support for `mysql`, just test `mysql2`
