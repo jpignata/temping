@@ -21,7 +21,7 @@ namespace :ci do
     task :collate do
       require "simplecov"
       SimpleCov.collate Dir["coverage-resultsets/coverage-*/.resultset.json"] do
-        enable_coverage :branch
+        enable_coverage :branch if respond_to?(:enable_coverage)
         formatter SimpleCov::Formatter::SimpleFormatter
       end
     end
