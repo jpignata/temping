@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.add_dependency "activerecord", ">= 5.2", "< 7.1"
   s.add_dependency "activesupport", ">= 5.2", "< 7.1"
 
-  s.add_development_dependency "appraisal"
+  s.add_development_dependency "appraisal", "~> 2.2"
 
   skipped_adapters = ENV["SKIPPED_ADAPTERS"].to_s.downcase
   sqlite_skipped = skipped_adapters.include?("sqlite")
@@ -35,5 +35,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 3.12"
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "simplecov", "~> 0.17"
-  s.add_development_dependency "standard"
+  s.add_development_dependency "standard", ">= 0.0.1", "< 2.0"
 end
