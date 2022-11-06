@@ -1,6 +1,6 @@
 require "simplecov"
 SimpleCov.start do
-  enable_coverage :branch
+  enable_coverage :branch if respond_to?(:enable_coverage)
   add_filter "test_config.rb"
 end
 

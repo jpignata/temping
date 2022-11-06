@@ -77,6 +77,12 @@ jobs:
             rails: '6.0'
           - ruby: '2.4'
             rails: '5.2'
+          - ruby: '2.3'
+            rails: '5.2'
+            skipped_adapters: 'mysql,postgresql' # these adapters don't work well with this setup
+          - ruby: '2.2.10'
+            rails: '5.2'
+            skipped_adapters: 'mysql,postgresql' # these adapters don't work well with this setup
           - ruby: 'jruby'
             rails: '6.1'
           - ruby: 'jruby'
@@ -89,6 +95,7 @@ jobs:
             rails: '6.0'
     env:
       BUNDLE_GEMFILE: gemfiles/activerecord_${{ matrix.rails }}.gemfile
+      SKIPPED_ADAPTERS: ${{ matrix.skipped_adapters }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -100,7 +107,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Run tests
-        run: ${{ matrix.env }} bundle exec rake spec
+        run: bundle exec rake spec
       - name: Upload code coverage results as artifacts
         uses: actions/upload-artifact@v3
         with:

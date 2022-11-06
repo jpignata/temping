@@ -10,7 +10,9 @@ User-visible changes worth mentioning.
 models in the reverse order  - Thanks @gregnavis
 - [#59](https://github.com/jpignata/temping/pull/59): Add support for Ruby 3.0 and above - Thanks @dark-panda
 - [#68](https://github.com/jpignata/temping/pull/68): Add support for Rails 7.0
-- [#69](https://github.com/jpignata/temping/pull/69): Drop support for Ruby below 2.0 and Rails below 5.2
+- [#69](https://github.com/jpignata/temping/pull/69), 
+[#81](https://github.com/jpignata/temping/pull/81): 
+Drop support for Ruby below 2.2.2 and Rails below 5.2
 
 ## 3.10.0 - 2017-09-27
 - Drop support for `mysql`, just test `mysql2`

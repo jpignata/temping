@@ -242,7 +242,7 @@ is about using **temporary** tables.
 
 ## Tested Environments
 
-The latest version of this gem is tested with the following interpreters/gems:
+The latest version of this gem is tested with the following setups:
 
 * MRI 3.2 with ActiveRecord 7.0
 * MRI 3.1 with ActiveRecord 7.0, 6.1
@@ -251,7 +251,9 @@ The latest version of this gem is tested with the following interpreters/gems:
 * MRI 2.6 with ActiveRecord 6.1, 6.0
 * MRI 2.5 with ActiveRecord 6.1, 6.0
 * MRI 2.4 with ActiveRecord 5.2
-* JRuby with ActiveRecord 6.1, 6.0 (activerecord-jdbc-adapter)
+* MRI 2.3 with ActiveRecord 5.2 (only SQLite)
+* MRI 2.2 with ActiveRecord 5.2 (only SQLite)
+* JRuby with ActiveRecord 6.1, 6.0 (with activerecord-jdbc-adapter)
 * TruffleRuby with ActiveRecord 7.0, 6.1, 6.0
 
 with the following database systems:

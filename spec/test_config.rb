@@ -7,7 +7,8 @@ module TestConfig
     end
 
     def adapter_versions
-      config.keys
+      @adapter_versions ||=
+        config.keys.reject { |key| skipped_adapters.any? { |adapter| key.to_s.include?(adapter) } }
     end
 
     # #current_adapter_version and #current_adapter_version= use an environment variable because
@@ -22,6 +23,11 @@ module TestConfig
     def current_adapter_version=(adapter_version)
       ENV["TEMPING_ADAPTER_VERSION"] = adapter_version
     end
+
+    def skipped_adapters
+      @skipped_adapters ||= ENV["SKIPPED_ADAPTERS"].to_s.downcase.split(/[,:;]/)
+    end
+    private :skipped_adapters
 
     def config
       @config ||= YAML.safe_load(File.read(config_path))
