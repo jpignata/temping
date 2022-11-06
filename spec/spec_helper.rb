@@ -4,7 +4,7 @@ SimpleCov.start do
   add_filter "test_config.rb"
 end
 
-$: << File.join(File.dirname(__FILE__), "/../lib")
+$LOAD_PATH << File.join(File.dirname(__FILE__), "/../lib")
 
 require "bundler/setup"
 require_relative "test_config"
