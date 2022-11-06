@@ -1,7 +1,7 @@
 # Temping
 
 [![Code Climate](https://codeclimate.com/github/jpignata/temping.png)](https://codeclimate.com/github/jpignata/temping)
-[![Build Status](https://github.com/jpignata/temping/workflows/tests/badge.svg?branch=master)](https://github.com/jpignata/temping/actions)
+[![Build Status](https://github.com/jpignata/temping/workflows/checks/badge.svg?branch=master)](https://github.com/jpignata/temping/actions)
 [![Gem Version](https://badge.fury.io/rb/temping.png)](http://badge.fury.io/rb/temping)
 
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
@@ -126,8 +126,9 @@ codey.quack
 # => "arf!"
 ```
 
-All attributes you can pass to `create_table` can be evaluated too. 
-For example you can create a dog with a primary key of the type uuid:
+All attributes you pass to `create_table` are evaluated too. 
+For example you can create a dog with a primary key of the type uuid
+(assuming you use PostgreSQL with uuid-ossp extension enabled):
 
 ```ruby
 Temping.create(:dog, id: :uuid, default: -> { "uuid_generate_v4()" })
