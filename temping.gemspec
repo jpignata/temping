@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.summary = "Create temporary table-backed ActiveRecord models for use in tests"
   s.license = "MIT"
 
-  s.files = ["lib/temping.rb"]
+  s.files = Dir["lib/**/*.rb"]
 
   s.required_ruby_version = ">= 2.2.2"
 
