@@ -250,7 +250,7 @@ The latest version of this gem is tested with the following setups:
 * MRI 2.7 with ActiveRecord 7.1, 7.0, 6.1, 6.0
 * MRI 2.6 with ActiveRecord 6.1, 6.0
 * MRI 2.5 with ActiveRecord 6.1, 6.0
-* JRuby with ActiveRecord 6.1 (with activerecord-jdbc-adapter)
+* JRuby with ActiveRecord 7.0, 6.1 (with activerecord-jdbc-adapter)
 * TruffleRuby with ActiveRecord 7.1, 7.0, 6.1, 6.0
 
 with the following database systems:

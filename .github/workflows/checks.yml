@@ -84,6 +84,8 @@ jobs:
           - ruby: '2.5'
             rails: '6.0'
           - ruby: 'jruby'
+            rails: '7.0'
+          - ruby: 'jruby'
             rails: '6.1'
           - ruby: 'truffleruby'
             rails: '7.1'
