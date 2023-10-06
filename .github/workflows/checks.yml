@@ -83,18 +83,8 @@ jobs:
             rails: '6.1'
           - ruby: '2.5'
             rails: '6.0'
-          - ruby: '2.4'
-            rails: '5.2'
-          - ruby: '2.3'
-            rails: '5.2'
-            skipped_adapters: 'mysql,postgresql' # these adapters don't work well with this setup
-          - ruby: '2.2.10'
-            rails: '5.2'
-            skipped_adapters: 'mysql,postgresql' # these adapters don't work well with this setup
           - ruby: 'jruby'
             rails: '6.1'
-          - ruby: 'jruby'
-            rails: '6.0'
           - ruby: 'truffleruby'
             rails: '7.1'
           - ruby: 'truffleruby'
