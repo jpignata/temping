@@ -9,10 +9,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir["lib/**/*.rb"]
 
-  s.required_ruby_version = ">= 2.2.2"
+  s.required_ruby_version = ">= 2.5"
 
-  s.add_dependency "activerecord", ">= 5.2", "< 8"
-  s.add_dependency "activesupport", ">= 5.2", "< 8"
+  s.add_dependency "activerecord", ">= 6.0", "< 8"
+  s.add_dependency "activesupport", ">= 6.0", "< 8"
 
   s.add_development_dependency "appraisal", "~> 2.2"
 
