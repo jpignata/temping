@@ -256,8 +256,8 @@ The latest version of this gem is tested with the following setups:
 with the following database systems:
 
 * SQLite3
-* MySQL (versions 5.5-8.0)
-* PostgreSQL (versions 10-15)
+* MySQL (versions 5.5-8.1)
+* PostgreSQL (versions 10-16)
 
 If you need to support older versions of Ruby or ActiveRecord you might have to use
 the older versions of this gem (3.10.0 or below).
