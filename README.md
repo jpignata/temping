@@ -260,7 +260,7 @@ with the following database systems:
 * PostgreSQL (versions 10-16)
 
 If you need to support older versions of Ruby or ActiveRecord you might have to use
-the older versions of this gem (3.10.0 or below).
+the older versions of this gem (4.0.0 or below).
 
 ## Contributing
 
