@@ -4,6 +4,13 @@ User-visible changes worth mentioning.
 
 ---
 
+## 4.1.0 - 2023-10-07
+- Add support for Rails 7.1 - Thanks @gregg-platogo
+- Drop support for Ruby below 2.5.0 and Rails below 6.0
+
+[(full changelog since previous version)](https://github.com/jpignata/temping/compare/v4.0.0...v4.1.0)
+
+
 ## 4.0.0 - 2022-11-06
 - [#79](https://github.com/jpignata/temping/pull/79): Support namespaces
 - [#77](https://github.com/jpignata/temping/pull/77): Fix `.teardown` and `.cleanup` methods to process 
