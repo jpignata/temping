@@ -85,7 +85,7 @@ class Temping
       until @namespaces.empty?
         namespace, index = @namespaces.each_with_index.max_by { |n, _i| n.name.split("::").length }
         parts = namespace.name.split("::")
-        parent = parts.length == 1 ? Object : parts[0...-1].join("::").constantize
+        parent = (parts.length == 1) ? Object : parts[0...-1].join("::").constantize
         parent.send(:remove_const, parts.last) if namespace_removable?(namespace, parts, parent)
         delete_or_trim_in_namespaces(parent, parts, index)
       end

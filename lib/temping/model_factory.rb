@@ -21,7 +21,7 @@ class Temping::ModelFactory
     Class.new(parent_class_name).tap do |klass|
       @namespace.const_set(@name, klass)
       klass.primary_key = @options[:primary_key] || :id
-      create_table(@options)
+      create_table(@options.except(:parent_class))
       add_methods
       klass.namespace = @namespace
     end
