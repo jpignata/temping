@@ -4,6 +4,11 @@ User-visible changes worth mentioning.
 
 ---
 
+## 4.1.1 - 2023-10-12
+- Fix support for Rails 7.1.x - Thanks @mikeastock
+
+[(full changelog since previous version)](https://github.com/jpignata/temping/compare/v4.1.0...v4.1.1)
+
 ## 4.1.0 - 2023-10-07
 - Add support for Rails 7.1 - Thanks @gregg-platogo
 - Drop support for Ruby below 2.5.0 and Rails below 6.0
