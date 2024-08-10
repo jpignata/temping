@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "temping"
-  s.version = "4.1.1"
+  s.version = "4.2.0"
   s.authors = ["John Pignata"]
   s.email = "john@pignata.com"
   s.homepage = "http://github.com/jpignata/temping"
