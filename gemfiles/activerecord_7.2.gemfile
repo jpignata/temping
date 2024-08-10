@@ -4,6 +4,6 @@ source "https://rubygems.org"
 
 gem "activerecord", "~> 7.2"
 gem "activesupport", "~> 7.2"
-gem "standard", "~> 1.16"
+gem "standard", "~> 1.31"
 
 gemspec path: "../"
