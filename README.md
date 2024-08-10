@@ -244,19 +244,19 @@ is about using **temporary** tables.
 
 The latest version of this gem is tested with the following setups:
 
-* MRI 3.2 with ActiveRecord 7.1, 7.0
-* MRI 3.1 with ActiveRecord 7.1, 7.0, 6.1
+* MRI 3.2 with ActiveRecord 7.2, 7.1, 7.0
+* MRI 3.1 with ActiveRecord 7.2, 7.1, 7.0, 6.1
 * MRI 3.0 with ActiveRecord 7.1, 7.0, 6.1
 * MRI 2.7 with ActiveRecord 7.1, 7.0, 6.1, 6.0
 * MRI 2.6 with ActiveRecord 6.1, 6.0
 * MRI 2.5 with ActiveRecord 6.1, 6.0
 * JRuby with ActiveRecord 7.0, 6.1 (with activerecord-jdbc-adapter)
-* TruffleRuby with ActiveRecord 7.1, 7.0, 6.1, 6.0
+* TruffleRuby with ActiveRecord 7.2, 7.1, 7.0, 6.1, 6.0
 
 with the following database systems:
 
 * SQLite3
-* MySQL (versions 5.5-8.1)
+* MySQL (versions 5.5-9.0)
 * PostgreSQL (versions 10-16)
 
 If you need to support older versions of Ruby or ActiveRecord you might have to use

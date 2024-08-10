@@ -1,9 +1,53 @@
 version: "3.8"
 services:
+  mysql9.0:
+    image: "mysql:9.0"
+    ports:
+      - "13316:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
+      interval: 1s
+      timeout: 5s
+      retries: 60
+  mysql8.4:
+    image: "mysql:8.4"
+    ports:
+      - "13317:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
+      interval: 1s
+      timeout: 5s
+      retries: 60
+  mysql8.3:
+    image: "mysql:8.3"
+    ports:
+      - "13318:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
+      interval: 1s
+      timeout: 5s
+      retries: 60
+  mysql8.2:
+    image: "mysql:8.2"
+    ports:
+      - "13319:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
+      interval: 1s
+      timeout: 5s
+      retries: 60
   mysql8.1:
     image: "mysql:8.1"
     ports:
-      - "13316:3306"
+      - "13320:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -14,7 +58,7 @@ services:
   mysql8.0:
     image: "mysql:8.0.31"
     ports:
-      - "13317:3306"
+      - "13321:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -25,7 +69,7 @@ services:
   mysql5.7:
     image: "mysql:5.7.40"
     ports:
-      - "13318:3306"
+      - "13322:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -36,7 +80,7 @@ services:
   mysql5.6:
     image: "mysql:5.6.51"
     ports:
-      - "13319:3306"
+      - "13323:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -47,7 +91,7 @@ services:
   mysql5.5:
     image: "mysql:5.5.62"
     ports:
-      - "13320:3306"
+      - "13324:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
