@@ -52,6 +52,10 @@ jobs:
       matrix:
         include:
           - ruby: '3.2'
+            rails: '7.2'
+          - ruby: '3.1'
+            rails: '7.2'
+          - ruby: '3.2'
             rails: '7.1'
           - ruby: '3.1'
             rails: '7.1'
