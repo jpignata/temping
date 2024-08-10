@@ -19,3 +19,9 @@ appraise "activerecord-7.1" do
   gem "activesupport", "~> 7.1"
   gem "standard", "~> 1.16"
 end
+
+appraise "activerecord-7.2" do
+  gem "activerecord", "~> 7.2"
+  gem "activesupport", "~> 7.2"
+  gem "standard", "~> 1.16"
+end
