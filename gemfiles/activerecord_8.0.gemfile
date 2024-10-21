@@ -6,8 +6,8 @@ gem "rspec", "~> 3.13"
 gem "rake", "~> 13.0"
 gem "simplecov", "~> 0.21"
 gem "standard", "~> 1.31"
-gem "activerecord", "~> 7.0.0"
-gem "activesupport", "~> 7.0.0"
+gem "activerecord", "~> 8.0.0"
+gem "activesupport", "~> 8.0.0"
 
 platforms :jruby do
   gem "activerecord-jdbcsqlite3-adapter", ">= 60.0"
@@ -16,7 +16,7 @@ platforms :jruby do
 end
 
 platforms :ruby, :truffleruby do
-  gem "sqlite3", "~> 1.6.0"
+  gem "sqlite3", "~> 2.2.0"
   gem "pg", "~> 1.5.8"
   gem "mysql2", "~> 0.5.6"
 end

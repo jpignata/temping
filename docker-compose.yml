@@ -1,9 +1,20 @@
 version: "3.8"
 services:
+  mysql9.1:
+    image: "mysql:9.1"
+    ports:
+      - "13316:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    healthcheck:
+      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
+      interval: 1s
+      timeout: 5s
+      retries: 60
   mysql9.0:
     image: "mysql:9.0"
     ports:
-      - "13316:3306"
+      - "13317:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -14,7 +25,7 @@ services:
   mysql8.4:
     image: "mysql:8.4"
     ports:
-      - "13317:3306"
+      - "13318:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -25,7 +36,7 @@ services:
   mysql8.3:
     image: "mysql:8.3"
     ports:
-      - "13318:3306"
+      - "13319:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -36,7 +47,7 @@ services:
   mysql8.2:
     image: "mysql:8.2"
     ports:
-      - "13319:3306"
+      - "13320:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -47,7 +58,7 @@ services:
   mysql8.1:
     image: "mysql:8.1"
     ports:
-      - "13320:3306"
+      - "13321:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -58,7 +69,7 @@ services:
   mysql8.0:
     image: "mysql:8.0.31"
     ports:
-      - "13321:3306"
+      - "13322:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -69,7 +80,7 @@ services:
   mysql5.7:
     image: "mysql:5.7.40"
     ports:
-      - "13322:3306"
+      - "13323:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     healthcheck:
@@ -80,17 +91,6 @@ services:
   mysql5.6:
     image: "mysql:5.6.51"
     ports:
-      - "13323:3306"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    healthcheck:
-      test: mysqladmin -u root -h 127.0.0.1 -P 3306 ping
-      interval: 1s
-      timeout: 5s
-      retries: 60
-  mysql5.5:
-    image: "mysql:5.5.62"
-    ports:
       - "13324:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
@@ -99,10 +99,21 @@ services:
       interval: 1s
       timeout: 5s
       retries: 60
+  postgresql17:
+    image: "postgres:17"
+    ports:
+      - "15442:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1 -p 5432
+      interval: 1s
+      timeout: 5s
+      retries: 60
   postgresql16:
     image: "postgres:16"
     ports:
-      - "15442:5432"
+      - "15443:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -113,7 +124,7 @@ services:
   postgresql15:
     image: "postgres:15"
     ports:
-      - "15443:5432"
+      - "15444:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -124,7 +135,7 @@ services:
   postgresql14:
     image: "postgres:14"
     ports:
-      - "15444:5432"
+      - "15445:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -135,7 +146,7 @@ services:
   postgresql13:
     image: "postgres:13"
     ports:
-      - "15445:5432"
+      - "15446:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -146,7 +157,7 @@ services:
   postgresql12:
     image: "postgres:12"
     ports:
-      - "15446:5432"
+      - "15447:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -157,7 +168,7 @@ services:
   postgresql11:
     image: "postgres:11"
     ports:
-      - "15447:5432"
+      - "15448:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:
@@ -168,7 +179,7 @@ services:
   postgresql10:
     image: "postgres:10"
     ports:
-      - "15448:5432"
+      - "15449:5432"
     environment:
       POSTGRES_PASSWORD: password
     healthcheck:

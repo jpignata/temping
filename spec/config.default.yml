@@ -1,115 +1,122 @@
 sqlite:
   adapter: sqlite3
   database: ":memory:"
-mysql9.0:
+mysql9.1:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13316
-mysql8.4:
+mysql9.0:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13317
-mysql8.3:
+mysql8.4:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13318
-mysql8.2:
+mysql8.3:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13319
-mysql8.1:
+mysql8.2:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13320
-mysql8.0:
+mysql8.1:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13321
-mysql5.7:
+mysql8.0:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13322
-mysql5.6:
+mysql5.7:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13323
-mysql5.5:
+mysql5.6:
   adapter: mysql2
   host: 127.0.0.1
   database: temping_test
   username: root
   password:
   port: 13324
-postgresql16:
+postgresql17:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15442
-postgresql15:
+postgresql16:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15443
-postgresql14:
+postgresql15:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15444
-postgresql13:
+postgresql14:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15445
-postgresql12:
+postgresql13:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15446
-postgresql11:
+postgresql12:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15447
-postgresql10:
+postgresql11:
   adapter: postgresql
   host: 127.0.0.1
   database: temping_test
   username: postgres
   password: password
   port: 15448
+postgresql10:
+  adapter: postgresql
+  host: 127.0.0.1
+  database: temping_test
+  username: postgres
+  password: password
+  port: 15449
