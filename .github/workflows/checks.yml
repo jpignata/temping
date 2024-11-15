@@ -171,10 +171,10 @@ jobs:
         run: |
           echo "Total line test coverage: ${{ steps.coverage.outputs.COVERAGE_LINE }}%"
           echo "Total branch test coverage: ${{ steps.coverage.outputs.COVERAGE_BRANCH }}%"
-      - name: Fail if coverage is less than 100%
-        if: steps.coverage.outputs.COVERAGE_LINE != 100 || steps.coverage.outputs.COVERAGE_BRANCH != 100
+      - name: Fail if coverage is low
+        if: steps.coverage.outputs.COVERAGE_LINE != 100 || steps.coverage.outputs.COVERAGE_BRANCH < 95
         uses: actions/github-script@v7
         with:
-          script: "core.setFailed('Please make sure test coverage is 100%. \
+          script: "core.setFailed('Please make sure line test coverage is 100% and branch test coverage is > 95%. \
                                    Currently: ${{ steps.coverage.outputs.COVERAGE_LINE }}% (line), \
                                    ${{ steps.coverage.outputs.COVERAGE_BRANCH }}% (branch).')"
