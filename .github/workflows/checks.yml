@@ -19,14 +19,14 @@ jobs:
     name: Run StandardRB linter
     runs-on: ubuntu-latest
     env:
-      BUNDLE_GEMFILE: gemfiles/activerecord_7.1.gemfile
+      BUNDLE_GEMFILE: gemfiles/activerecord_8.0.gemfile
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3'
           bundler-cache: true
       - name: Run StandardRB
         id: offenses
@@ -40,7 +40,7 @@ jobs:
           echo '${{ steps.offenses.outputs.LINTER_OFFENSES }}'
       - name: Fail if StandardRB offenses found
         if: steps.offenses.outputs.LINTER_OFFENSES
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: "core.setFailed('StandardRB linter offenses found. Please inspect the details \
                                    of the previous step in the job for more info.')"
@@ -51,6 +51,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - ruby: '3.3'
+            rails: '8.0'
+          - ruby: '3.3'
+            rails: '7.2'
+          - ruby: '3.3'
+            rails: '7.1'
+          - ruby: '3.3'
+            rails: '7.0'
+          - ruby: '3.2'
+            rails: '8.0'
           - ruby: '3.2'
             rails: '7.2'
           - ruby: '3.2'
@@ -91,6 +101,8 @@ jobs:
             rails: '7.0'
           - ruby: 'jruby'
             rails: '6.1'
+          - ruby: 'truffleruby'
+            rails: '8.0'
           - ruby: 'truffleruby'
             rails: '7.2'
           - ruby: 'truffleruby'
@@ -106,7 +118,7 @@ jobs:
       SKIPPED_ADAPTERS: ${{ matrix.skipped_adapters }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup MySQL and PostgreSQL via Docker Compose
         run: docker compose up -d --wait
       - name: Install Ruby
@@ -117,21 +129,22 @@ jobs:
       - name: Run tests
         run: bundle exec rake spec
       - name: Upload code coverage results as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}
+          include-hidden-files: true
           path: coverage/.resultset.json
   coverage:
     name: Calculate test coverage
     needs: tests
     runs-on: ubuntu-latest
     env:
-      BUNDLE_GEMFILE: gemfiles/activerecord_7.1.gemfile
+      BUNDLE_GEMFILE: gemfiles/activerecord_8.0.gemfile
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: coverage-resultsets
       - name: Display structure of downloaded files
@@ -139,14 +152,15 @@ jobs:
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3'
           bundler-cache: true
       - name: Collate coverage reports
         run: ${{ matrix.env }} bundle exec rake ci:coverage:collate
       - name: Upload total code coverage result as an artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-total
+          include-hidden-files: true
           path: coverage/.last_run.json
       - name: Fetch total coverage values from simplecov files
         id: coverage
@@ -159,7 +173,7 @@ jobs:
           echo "Total branch test coverage: ${{ steps.coverage.outputs.COVERAGE_BRANCH }}%"
       - name: Fail if coverage is less than 100%
         if: steps.coverage.outputs.COVERAGE_LINE != 100 || steps.coverage.outputs.COVERAGE_BRANCH != 100
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: "core.setFailed('Please make sure test coverage is 100%. \
                                    Currently: ${{ steps.coverage.outputs.COVERAGE_LINE }}% (line), \

@@ -35,7 +35,7 @@ ActiveRecord version. This is done with the help of
 For example:
 
 ```shell
-$ BUNDLE_GEMFILE=gemfiles/activerecord_6.1.gemfile rake
+$ BUNDLE_GEMFILE=gemfiles/activerecord_8.0.gemfile rake
 ```
 
 The configuration used to access the databases is stored in

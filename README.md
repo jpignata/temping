@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/jpignata/temping.png)](https://codeclimate.com/github/jpignata/temping)
 [![Build Status](https://github.com/jpignata/temping/workflows/checks/badge.svg?branch=master)](https://github.com/jpignata/temping/actions)
-[![Gem Version](https://badge.fury.io/rb/temping.png)](http://badge.fury.io/rb/temping)
+[![Gem Version](https://badge.fury.io/rb/temping.png)](https://badge.fury.io/rb/temping)
 
 Temping allows you to create arbitrary ActiveRecord models backed by a temporary
 SQL table for use in tests. You may need to do something like this if you're
@@ -222,7 +222,7 @@ Temping.create("continents/countries/cities/streets/buildings")
 
 ## Foreign Keys
 
-Temporary tables in [MySQL](https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html) 
+Temporary tables in [MySQL](https://dev.mysql.com/doc/refman/9.1/en/create-table-foreign-keys.html) 
 cannot have foreign keys. PostgreSQL doesn't have this limitation.
 
 If you want to use foreign keys with Temping in MySQL you might want to consider 
@@ -244,20 +244,21 @@ is about using **temporary** tables.
 
 The latest version of this gem is tested with the following setups:
 
-* MRI 3.2 with ActiveRecord 7.2, 7.1, 7.0
+* MRI 3.3 with ActiveRecord 8.0, 7.2, 7.1, 7.0
+* MRI 3.2 with ActiveRecord 8.0, 7.2, 7.1, 7.0
 * MRI 3.1 with ActiveRecord 7.2, 7.1, 7.0, 6.1
 * MRI 3.0 with ActiveRecord 7.1, 7.0, 6.1
 * MRI 2.7 with ActiveRecord 7.1, 7.0, 6.1, 6.0
 * MRI 2.6 with ActiveRecord 6.1, 6.0
 * MRI 2.5 with ActiveRecord 6.1, 6.0
 * JRuby with ActiveRecord 7.0, 6.1 (with activerecord-jdbc-adapter)
-* TruffleRuby with ActiveRecord 7.2, 7.1, 7.0, 6.1, 6.0
+* TruffleRuby with ActiveRecord 8.0, 7.2, 7.1, 7.0, 6.1, 6.0
 
 with the following database systems:
 
 * SQLite3
-* MySQL (versions 5.5-9.0)
-* PostgreSQL (versions 10-16)
+* MySQL (versions 5.6-9.1)
+* PostgreSQL (versions 10-17)
 
 If you need to support older versions of Ruby or ActiveRecord you might have to use
 the older versions of this gem (4.0.0 or below).
