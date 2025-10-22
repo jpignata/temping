@@ -126,7 +126,7 @@ codey.quack
 # => "arf!"
 ```
 
-All attributes you pass to `create_table` are evaluated too. 
+All attributes you pass to `create_table` are evaluated too.
 For example you can create a dog with a primary key of the type uuid
 (assuming you use PostgreSQL with uuid-ossp extension enabled):
 
@@ -169,7 +169,7 @@ my_car.navigate_to(:home)
 
 ## Namespaces
 
-Temping supports creating models within namespaces. 
+Temping supports creating models within namespaces.
 You can do this either by just including the full namespace in the name:
 
 ```ruby
@@ -195,11 +195,11 @@ Engineers::Developer.table_name # => "hard_working_developers"
 Engineers::Developer # => Engineers::Developer(id: integer)
 ```
 
-Please note that if you create the modules yourself, Temping will NOT attempt 
-to undefine them when you call `Temping.teardown`, it will only undefine the modules/models 
+Please note that if you create the modules yourself, Temping will NOT attempt
+to undefine them when you call `Temping.teardown`, it will only undefine the modules/models
 created by itself:
 
-```ruby 
+```ruby
 module Engineers; end
 Temping.create("engineers/developers")
 Temping.create("animal/cat")
@@ -214,7 +214,7 @@ Object.const_defined?("Animal::Cat") # => false
 
 Deep namespaces are supported as well:
 
-```ruby 
+```ruby
 Temping.create("continents/countries/cities/streets/buildings")
 
 # => Continents::Countries::Cities::Streets::Building(id: integer) 
@@ -222,10 +222,10 @@ Temping.create("continents/countries/cities/streets/buildings")
 
 ## Foreign Keys
 
-Temporary tables in [MySQL](https://dev.mysql.com/doc/refman/9.1/en/create-table-foreign-keys.html) 
+Temporary tables in [MySQL](https://dev.mysql.com/doc/refman/9.5/en/create-table-foreign-keys.html)
 cannot have foreign keys. PostgreSQL doesn't have this limitation.
 
-If you want to use foreign keys with Temping in MySQL you might want to consider 
+If you want to use foreign keys with Temping in MySQL you might want to consider
 making tables permanent by overwriting `temporary` option when you set up a model:
 
 ```ruby
@@ -237,34 +237,35 @@ Temping.create(:post, temporary: false) do
 end
 ```
 
-This however is not a recommended approach because the whole idea of Temping 
+This however is not a recommended approach because the whole idea of Temping
 is about using **temporary** tables.
 
 ## Tested Environments
 
 The latest version of this gem is tested with the following setups:
 
-* MRI 3.3 with ActiveRecord 8.0, 7.2, 7.1, 7.0
-* MRI 3.2 with ActiveRecord 8.0, 7.2, 7.1, 7.0
-* MRI 3.1 with ActiveRecord 7.2, 7.1, 7.0, 6.1
-* MRI 3.0 with ActiveRecord 7.1, 7.0, 6.1
-* MRI 2.7 with ActiveRecord 7.1, 7.0, 6.1, 6.0
-* MRI 2.6 with ActiveRecord 6.1, 6.0
-* MRI 2.5 with ActiveRecord 6.1, 6.0
-* JRuby with ActiveRecord 7.0, 6.1 (with activerecord-jdbc-adapter)
-* TruffleRuby with ActiveRecord 8.0, 7.2, 7.1, 7.0, 6.1, 6.0
+- MRI 3.4 with ActiveRecord 8.1, 8.0, 7.2, 7.1, 7.0
+- MRI 3.3 with ActiveRecord 8.1, 8.0, 7.2, 7.1, 7.0
+- MRI 3.2 with ActiveRecord 8.1, 8.0, 7.2, 7.1, 7.0
+- MRI 3.1 with ActiveRecord 7.2, 7.1, 7.0, 6.1
+- MRI 3.0 with ActiveRecord 7.1, 7.0, 6.1
+- MRI 2.7 with ActiveRecord 7.1, 7.0, 6.1, 6.0
+- MRI 2.6 with ActiveRecord 6.1, 6.0
+- MRI 2.5 with ActiveRecord 6.1, 6.0
+- JRuby with ActiveRecord 7.0, 6.1 (with activerecord-jdbc-adapter)
+- TruffleRuby with ActiveRecord 8.1, 8.0, 7.2, 7.1, 7.0, 6.1, 6.0
 
 with the following database systems:
 
-* SQLite3
-* MySQL (versions 5.6-9.1)
-* PostgreSQL (versions 10-17)
+- SQLite3
+- MySQL (versions 5.6-9.5)
+- PostgreSQL (versions 10-18)
 
 If you need to support older versions of Ruby or ActiveRecord you might have to use
 the older versions of this gem (4.0.0 or below).
 
 ## Contributing
 
-All contributions are welcome! 
+All contributions are welcome!
 
 Please take a look at `CONTRIBUTING.md` for some tips.
