@@ -9,7 +9,6 @@ User-visible changes worth mentioning.
 
 [(full changelog since previous version)](https://github.com/jpignata/temping/compare/v4.3.0...v4.4.0)
 
-
 ## 4.3.0 - 2024-11-15
 - Add support for Rails 8.0 - Thanks @zhuravel
 
